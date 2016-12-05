@@ -3,7 +3,20 @@ grammar fr.paris10.miage.SimpleJ with org.eclipse.xtext.common.Terminals
 generate simpleJ "http://www.paris10.fr/miage/SimpleJ"
 
 Model:
-	greetings+=Greeting*;
+	classes+=Classe*;
 	
-Greeting:
-	'Hello' name=ID '!';
+Classe:
+	"class" name=ID "(" (attributs+=Attribut(',' attributs+=Attribut)*)? ")"
+;
+
+Attribut:
+	acces=Acces name=ID ":" type=Type
+;
+
+enum Acces :
+	accessVar="var" | accessConst="const" | accessHidden="hidden"
+;
+
+Type :
+	name=ID
+;

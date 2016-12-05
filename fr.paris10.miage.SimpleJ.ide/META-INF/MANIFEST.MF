@@ -9,3 +9,6 @@ Require-Bundle: fr.paris10.miage.SimpleJ,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: fr.paris10.miage.ide.contentassist.antlr.internal,
+ fr.paris10.miage.ide.contentassist.antlr
+

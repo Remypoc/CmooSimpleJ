@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.paris10.fr/miage/SimpleJ"
+			class = "fr.paris10.miage.simpleJ.SimpleJPackage"
+			genModel = "model/generated/SimpleJ.genmodel" />
+	</extension>
+</plugin>
