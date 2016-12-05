@@ -31,12 +31,19 @@ public class SimpleJValidator extends AbstractSimpleJValidator {
   }
   
   @Check(CheckType.FAST)
-  public void checkClassStartWithUpper(final Attribut attribut) {
+  public void checkClassStartWithLower(final Attribut attribut) {
     String _name = attribut.getName();
     char _charAt = _name.charAt(0);
     boolean _isUpperCase = Character.isUpperCase(_charAt);
     if (_isUpperCase) {
       this.warning("Le nom d\'un attribut doit commencer par une minuscule !", SimpleJPackage.Literals.ATTRIBUT__NAME, SimpleJValidator.ERROR_NAME);
+    }
+  }
+  
+  @Check(CheckType.NORMAL)
+  public void checkAttibutType(final Attribut attribut) {
+    if (((((!attribut.getType().getName().equals("boolean")) || (!attribut.getType().getName().equals("int"))) || (!attribut.getType().getName().equals("String"))) || (!attribut.getType().getName().equals("double")))) {
+      this.error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__NAME, SimpleJValidator.ERROR_NAME);
     }
   }
 }

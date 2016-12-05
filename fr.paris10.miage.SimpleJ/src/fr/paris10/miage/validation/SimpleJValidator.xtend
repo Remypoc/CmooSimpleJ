@@ -36,9 +36,16 @@ class SimpleJValidator extends AbstractSimpleJValidator {
 	}
 	
 	@Check(FAST)
-	def checkClassStartWithUpper(Attribut attribut) {
+	def checkClassStartWithLower(Attribut attribut) {
 		if(Character.isUpperCase(attribut.name.charAt(0))) {
 			warning("Le nom d'un attribut doit commencer par une minuscule !", SimpleJPackage.Literals.ATTRIBUT__NAME , ERROR_NAME)
+		}
+	}
+	
+	@Check(NORMAL)
+	def checkAttibutType(Attribut attribut) {
+		if(!attribut.type.name.equals("boolean") || !attribut.type.name.equals("int") || !attribut.type.name.equals("String") || !attribut.type.name.equals("double")) {
+			error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__NAME , ERROR_NAME)
 		}
 	}
 }
