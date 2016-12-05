@@ -31,4 +31,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>fr.paris10.miage.SimpleJ.ide</name>
+			<type>2</type>
+			<location>A:/Programmes/eclipse-neon-modeling/worspace/CmooSimpleJ/fr.paris10.miage.SimpleJ.ide</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -3,12 +3,25 @@
  */
 package fr.paris10.miage.validation;
 
+import com.google.common.collect.Iterators;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
+import fr.paris10.miage.simpleJ.Model;
 import fr.paris10.miage.simpleJ.SimpleJPackage;
+import fr.paris10.miage.simpleJ.Type;
 import fr.paris10.miage.validation.AbstractSimpleJValidator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 /**
  * This class contains custom validation rules.
@@ -17,8 +30,39 @@ import org.eclipse.xtext.validation.CheckType;
  */
 @SuppressWarnings("all")
 public class SimpleJValidator extends AbstractSimpleJValidator {
+  private List<String> typesAccepte = new ArrayList<String>(Arrays.<String>asList("int", "String", "double", "boolean"));
+  
+  /**
+   * Contient tous les types acceptés
+   */
+  private Set<String> allTypes;
+  
+  /**
+   * Permet de récupérer tous les types acceptés
+   */
+  @Check
+  public boolean checkTest(final Model model) {
+    boolean _xblockexpression = false;
+    {
+      Resource _eResource = model.eResource();
+      TreeIterator<EObject> _allContents = _eResource.getAllContents();
+      Iterator<Classe> _filter = Iterators.<Classe>filter(_allContents, Classe.class);
+      final Function1<Classe, String> _function = (Classe it) -> {
+        return it.getName();
+      };
+      Iterator<String> _map = IteratorExtensions.<Classe, String>map(_filter, _function);
+      Set<String> _set = IteratorExtensions.<String>toSet(_map);
+      this.allTypes = _set;
+      _xblockexpression = this.allTypes.addAll(this.typesAccepte);
+    }
+    return _xblockexpression;
+  }
+  
   public final static String ERROR_NAME = "invalidName";
   
+  /**
+   * Check si le nom d'une classe commence bien par une majuscule
+   */
   @Check(CheckType.FAST)
   public void checkClassStartWithUpper(final Classe classe) {
     String _name = classe.getName();
@@ -30,6 +74,9 @@ public class SimpleJValidator extends AbstractSimpleJValidator {
     }
   }
   
+  /**
+   * Check si le nom d'un attribut commence bien par une minuscule
+   */
   @Check(CheckType.FAST)
   public void checkClassStartWithLower(final Attribut attribut) {
     String _name = attribut.getName();
@@ -40,10 +87,17 @@ public class SimpleJValidator extends AbstractSimpleJValidator {
     }
   }
   
+  /**
+   * Check si le type d'une variable est bien valide
+   */
   @Check(CheckType.NORMAL)
   public void checkAttibutType(final Attribut attribut) {
-    if (((((!attribut.getType().getName().equals("boolean")) || (!attribut.getType().getName().equals("int"))) || (!attribut.getType().getName().equals("String"))) || (!attribut.getType().getName().equals("double")))) {
-      this.error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__NAME, SimpleJValidator.ERROR_NAME);
+    Type _type = attribut.getType();
+    String _name = _type.getName();
+    boolean _contains = this.allTypes.contains(_name);
+    boolean _not = (!_contains);
+    if (_not) {
+      this.error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__TYPE, SimpleJValidator.ERROR_NAME);
     }
   }
 }

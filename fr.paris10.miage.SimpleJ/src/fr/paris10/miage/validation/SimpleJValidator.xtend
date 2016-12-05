@@ -7,6 +7,11 @@ import org.eclipse.xtext.validation.Check
 import fr.paris10.miage.simpleJ.Classe
 import fr.paris10.miage.simpleJ.SimpleJPackage
 import fr.paris10.miage.simpleJ.Attribut
+import java.util.List
+import java.util.ArrayList
+import java.util.Arrays
+import fr.paris10.miage.simpleJ.Model
+import java.util.Set
 
 /**
  * This class contains custom validation rules. 
@@ -25,9 +30,22 @@ class SimpleJValidator extends AbstractSimpleJValidator {
 //					INVALID_NAME)
 //		}
 //	}
+
+	List<String> typesAccepte = new ArrayList<String>(Arrays.asList("int", "String", "double", "boolean"));
+
+	/* Contient tous les types acceptés */ 
+	Set<String> allTypes; 
+	
+	/* Permet de récupérer tous les types acceptés */
+	@Check
+	def checkTest(Model model) {
+		allTypes =  model.eResource.allContents.filter(typeof(Classe)).map[name].toSet; 
+		allTypes.addAll(typesAccepte);
+	}
 	
 	public static val ERROR_NAME = "invalidName"
 	
+	/* Check si le nom d'une classe commence bien par une majuscule */
 	@Check(FAST)
 	def checkClassStartWithUpper(Classe classe) {
 		if(!Character.isUpperCase(classe.name.charAt(0))) {
@@ -35,6 +53,7 @@ class SimpleJValidator extends AbstractSimpleJValidator {
 		}
 	}
 	
+	/* Check si le nom d'un attribut commence bien par une minuscule */
 	@Check(FAST)
 	def checkClassStartWithLower(Attribut attribut) {
 		if(Character.isUpperCase(attribut.name.charAt(0))) {
@@ -42,10 +61,11 @@ class SimpleJValidator extends AbstractSimpleJValidator {
 		}
 	}
 	
+	/* Check si le type d'une variable est bien valide */
 	@Check(NORMAL)
 	def checkAttibutType(Attribut attribut) {
-		if(!attribut.type.name.equals("boolean") || !attribut.type.name.equals("int") || !attribut.type.name.equals("String") || !attribut.type.name.equals("double")) {
-			error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__NAME , ERROR_NAME)
+		if(!allTypes.contains(attribut.type.name)) {
+			error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__TYPE , ERROR_NAME)
 		}
 	}
 }
