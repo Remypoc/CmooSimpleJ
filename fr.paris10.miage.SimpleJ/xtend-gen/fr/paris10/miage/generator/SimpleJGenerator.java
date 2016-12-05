@@ -3,10 +3,19 @@
  */
 package fr.paris10.miage.generator;
 
+import com.google.common.collect.Iterators;
+import fr.paris10.miage.simpleJ.Classe;
+import java.util.Iterator;
+import java.util.Set;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 /**
  * Generates code from your model files on save.
@@ -17,5 +26,27 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class SimpleJGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    TreeIterator<EObject> _allContents = resource.getAllContents();
+    Iterator<Classe> _filter = Iterators.<Classe>filter(_allContents, Classe.class);
+    final Function1<Classe, String> _function = (Classe it) -> {
+      return it.getName();
+    };
+    Iterator<String> _map = IteratorExtensions.<Classe, String>map(_filter, _function);
+    final Set<String> classes = IteratorExtensions.<String>toSet(_map);
+    for (final String nom : classes) {
+      CharSequence _genererJava = this.genererJava(nom);
+      fsa.generateFile((nom + ".java"), _genererJava);
+    }
+  }
+  
+  public CharSequence genererJava(final String nom) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class ");
+    _builder.append(nom, "");
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
   }
 }

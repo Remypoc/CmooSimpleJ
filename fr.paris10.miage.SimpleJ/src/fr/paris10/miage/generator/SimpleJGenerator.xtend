@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import fr.paris10.miage.simpleJ.Classe
 
 /**
  * Generates code from your model files on save.
@@ -21,5 +22,16 @@ class SimpleJGenerator extends AbstractGenerator {
 //				.filter(typeof(Greeting))
 //				.map[name]
 //				.join(', '))
+
+		val classes = resource.allContents.filter(typeof(Classe)).map[name].toSet;
+		for(String nom : classes) {
+			fsa.generateFile(nom + ".java", genererJava(nom));
+		}
 	}
+	
+	//Template de nos pages html
+	def genererJava(String nom) '''
+	public class «nom» {
+	}
+	'''
 }
