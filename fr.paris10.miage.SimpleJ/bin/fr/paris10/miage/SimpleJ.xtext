@@ -1,0 +1,9 @@
+grammar fr.paris10.miage.SimpleJ with org.eclipse.xtext.common.Terminals
+
+generate simpleJ "http://www.paris10.fr/miage/SimpleJ"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
