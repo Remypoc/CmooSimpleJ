@@ -8,6 +8,7 @@ import fr.paris10.miage.services.SimpleJGrammarAccess;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
 import fr.paris10.miage.simpleJ.Model;
+import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.SimpleJPackage;
 import fr.paris10.miage.simpleJ.Type;
 import java.util.Set;
@@ -43,6 +44,9 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 				return; 
 			case SimpleJPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
+				return; 
+			case SimpleJPackage.PROGRAM:
+				sequence_Program(context, (Program) semanticObject); 
 				return; 
 			case SimpleJPackage.TYPE:
 				sequence_Type(context, (Type) semanticObject); 
@@ -81,7 +85,7 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Classe returns Classe
 	 *
 	 * Constraint:
-	 *     (name=ID (attributs+=Attribut attributs+=Attribut*)?)
+	 *     (name=ID (attributs+=Attribut attributs+=Attribut*)? herite=ID?)
 	 */
 	protected void sequence_Classe(ISerializationContext context, Classe semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -93,10 +97,28 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     classes+=Classe+
+	 *     ((classes+=Classe+ program=Program) | program=Program)?
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Program returns Program
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_Program(ISerializationContext context, Program semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SimpleJPackage.Literals.PROGRAM__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleJPackage.Literals.PROGRAM__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getProgramAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	

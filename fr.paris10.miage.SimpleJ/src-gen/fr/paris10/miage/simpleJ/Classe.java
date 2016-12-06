@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link fr.paris10.miage.simpleJ.Classe#getName <em>Name</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.Classe#getAttributs <em>Attributs</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.Classe#getHerite <em>Herite</em>}</li>
  * </ul>
  *
  * @see fr.paris10.miage.simpleJ.SimpleJPackage#getClasse()
@@ -67,5 +68,31 @@ public interface Classe extends EObject
    * @generated
    */
   EList<Attribut> getAttributs();
+
+  /**
+   * Returns the value of the '<em><b>Herite</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Herite</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Herite</em>' attribute.
+   * @see #setHerite(String)
+   * @see fr.paris10.miage.simpleJ.SimpleJPackage#getClasse_Herite()
+   * @model
+   * @generated
+   */
+  String getHerite();
+
+  /**
+   * Sets the value of the '{@link fr.paris10.miage.simpleJ.Classe#getHerite <em>Herite</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Herite</em>' attribute.
+   * @see #getHerite()
+   * @generated
+   */
+  void setHerite(String value);
 
 } // Classe

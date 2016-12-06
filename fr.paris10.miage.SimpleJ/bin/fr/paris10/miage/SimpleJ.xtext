@@ -3,10 +3,11 @@ grammar fr.paris10.miage.SimpleJ with org.eclipse.xtext.common.Terminals
 generate simpleJ "http://www.paris10.fr/miage/SimpleJ"
 
 Model:
-	classes+=Classe*;
+	classes+=Classe*
+	(program=Program)?;
 	
 Classe:
-	"class" name=ID "(" (attributs+=Attribut(',' attributs+=Attribut)*)? ")"
+	"class" name=ID "(" (attributs+=Attribut(',' attributs+=Attribut)*)? ")" (":" herite=ID)?
 ;
 
 Attribut:
@@ -19,4 +20,8 @@ enum Acces :
 
 Type :
 	name=ID
+;
+
+Program:
+	"program" name=ID
 ;

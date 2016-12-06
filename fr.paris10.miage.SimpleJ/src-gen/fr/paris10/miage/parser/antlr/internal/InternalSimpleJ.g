@@ -78,23 +78,44 @@ ruleModel returns [EObject current=null]
 }:
 	(
 		(
-			{
-				newCompositeNode(grammarAccess.getModelAccess().getClassesClasseParserRuleCall_0());
-			}
-			lv_classes_0_0=ruleClasse
-			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getModelRule());
+			(
+				{
+					newCompositeNode(grammarAccess.getModelAccess().getClassesClasseParserRuleCall_0_0());
 				}
-				add(
-					$current,
-					"classes",
-					lv_classes_0_0,
-					"fr.paris10.miage.SimpleJ.Classe");
-				afterParserOrEnumRuleCall();
-			}
-		)
-	)*
+				lv_classes_0_0=ruleClasse
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getModelRule());
+					}
+					add(
+						$current,
+						"classes",
+						lv_classes_0_0,
+						"fr.paris10.miage.SimpleJ.Classe");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getModelAccess().getProgramProgramParserRuleCall_1_0());
+				}
+				lv_program_1_0=ruleProgram
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getModelRule());
+					}
+					set(
+						$current,
+						"program",
+						lv_program_1_0,
+						"fr.paris10.miage.SimpleJ.Program");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+	)
 ;
 
 // Entry rule entryRuleClasse
@@ -189,6 +210,30 @@ ruleClasse returns [EObject current=null]
 		{
 			newLeafNode(otherlv_6, grammarAccess.getClasseAccess().getRightParenthesisKeyword_4());
 		}
+		(
+			otherlv_7=':'
+			{
+				newLeafNode(otherlv_7, grammarAccess.getClasseAccess().getColonKeyword_5_0());
+			}
+			(
+				(
+					lv_herite_8_0=RULE_ID
+					{
+						newLeafNode(lv_herite_8_0, grammarAccess.getClasseAccess().getHeriteIDTerminalRuleCall_5_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getClasseRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"herite",
+							lv_herite_8_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+		)?
 	)
 ;
 
@@ -302,6 +347,47 @@ ruleType returns [EObject current=null]
 					lv_name_0_0,
 					"org.eclipse.xtext.common.Terminals.ID");
 			}
+		)
+	)
+;
+
+// Entry rule entryRuleProgram
+entryRuleProgram returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getProgramRule()); }
+	iv_ruleProgram=ruleProgram
+	{ $current=$iv_ruleProgram.current; }
+	EOF;
+
+// Rule Program
+ruleProgram returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='program'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getProgramAccess().getProgramKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getProgramAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getProgramRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
 		)
 	)
 ;

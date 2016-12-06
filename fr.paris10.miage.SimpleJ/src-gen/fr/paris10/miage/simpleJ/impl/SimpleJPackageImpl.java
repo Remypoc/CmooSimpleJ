@@ -7,6 +7,7 @@ import fr.paris10.miage.simpleJ.Acces;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
 import fr.paris10.miage.simpleJ.Model;
+import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.SimpleJFactory;
 import fr.paris10.miage.simpleJ.SimpleJPackage;
 import fr.paris10.miage.simpleJ.Type;
@@ -54,6 +55,13 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    * @generated
    */
   private EClass typeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass programEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -150,6 +158,16 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getModel_Program()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getClasse()
   {
     return classeEClass;
@@ -173,6 +191,16 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
   public EReference getClasse_Attributs()
   {
     return (EReference)classeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getClasse_Herite()
+  {
+    return (EAttribute)classeEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -240,6 +268,26 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getProgram()
+  {
+    return programEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getProgram_Name()
+  {
+    return (EAttribute)programEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getAcces()
   {
     return accesEEnum;
@@ -277,10 +325,12 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEReference(modelEClass, MODEL__CLASSES);
+    createEReference(modelEClass, MODEL__PROGRAM);
 
     classeEClass = createEClass(CLASSE);
     createEAttribute(classeEClass, CLASSE__NAME);
     createEReference(classeEClass, CLASSE__ATTRIBUTS);
+    createEAttribute(classeEClass, CLASSE__HERITE);
 
     attributEClass = createEClass(ATTRIBUT);
     createEAttribute(attributEClass, ATTRIBUT__ACCES);
@@ -289,6 +339,9 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
 
     typeEClass = createEClass(TYPE);
     createEAttribute(typeEClass, TYPE__NAME);
+
+    programEClass = createEClass(PROGRAM);
+    createEAttribute(programEClass, PROGRAM__NAME);
 
     // Create enums
     accesEEnum = createEEnum(ACCES);
@@ -327,10 +380,12 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getModel_Classes(), this.getClasse(), null, "classes", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Program(), this.getProgram(), null, "program", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(classeEClass, Classe.class, "Classe", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getClasse_Name(), ecorePackage.getEString(), "name", null, 0, 1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getClasse_Attributs(), this.getAttribut(), null, "attributs", null, 0, -1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getClasse_Herite(), ecorePackage.getEString(), "herite", null, 0, 1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributEClass, Attribut.class, "Attribut", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttribut_Acces(), this.getAcces(), "acces", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -339,6 +394,9 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getType_Name(), ecorePackage.getEString(), "name", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getProgram_Name(), ecorePackage.getEString(), "name", null, 0, 1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(accesEEnum, Acces.class, "Acces");

@@ -8,6 +8,7 @@ import com.google.common.collect.Iterators;
 import fr.paris10.miage.simpleJ.Acces;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
+import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.Type;
 import java.util.Iterator;
 import java.util.Set;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * Generates code from your model files on save.
@@ -31,23 +33,36 @@ public class SimpleJGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     TreeIterator<EObject> _allContents = resource.getAllContents();
-    Iterator<Classe> _filter = Iterators.<Classe>filter(_allContents, Classe.class);
-    final Set<Classe> classes = IteratorExtensions.<Classe>toSet(_filter);
-    for (final Classe classe : classes) {
-      String _name = classe.getName();
+    Iterator<Program> _filter = Iterators.<Program>filter(_allContents, Program.class);
+    final Set<Program> programs = IteratorExtensions.<Program>toSet(_filter);
+    for (final Program program : programs) {
+      String _name = program.getName();
       String _plus = (_name + ".java");
-      String _name_1 = classe.getName();
+      String _name_1 = program.getName();
+      CharSequence _genererMain = this.genererMain(_name_1);
+      fsa.generateFile(_plus, _genererMain);
+    }
+    TreeIterator<EObject> _allContents_1 = resource.getAllContents();
+    Iterator<Classe> _filter_1 = Iterators.<Classe>filter(_allContents_1, Classe.class);
+    final Set<Classe> classes = IteratorExtensions.<Classe>toSet(_filter_1);
+    for (final Classe classe : classes) {
+      String _name_2 = classe.getName();
+      String _plus_1 = (_name_2 + ".java");
+      String _name_3 = classe.getName();
       String _genererAttributs = this.genererAttributs(resource, classe);
-      CharSequence _genererJava = this.genererJava(_name_1, _genererAttributs);
-      fsa.generateFile(_plus, _genererJava);
+      CharSequence _genererJava = this.genererJava(_name_3, _genererAttributs, classe);
+      fsa.generateFile(_plus_1, _genererJava);
     }
   }
   
-  public CharSequence genererJava(final String nom, final String content) {
+  public CharSequence genererJava(final String nom, final String content, final Classe classe) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class ");
     _builder.append(nom, "");
-    _builder.append(" {");
+    _builder.append(" ");
+    CharSequence _genererHeritage = this.genererHeritage(classe);
+    _builder.append(_genererHeritage, "");
+    _builder.append("{");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -123,18 +138,14 @@ public class SimpleJGenerator extends AbstractGenerator {
     _builder.append(_name, "");
     _builder.append(" get");
     String _name_1 = attribut.getName();
-    String _substring = _name_1.substring(0, 1);
-    String _upperCase = _substring.toUpperCase();
-    String _name_2 = attribut.getName();
-    String _substring_1 = _name_2.substring(1);
-    String _plus = (_upperCase + _substring_1);
-    _builder.append(_plus, "");
+    String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+    _builder.append(_firstUpper, "");
     _builder.append("()");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("return ");
-    String _name_3 = attribut.getName();
-    _builder.append(_name_3, "\t");
+    String _name_2 = attribut.getName();
+    _builder.append(_name_2, "\t");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
@@ -146,30 +157,78 @@ public class SimpleJGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public void set");
     String _name = attribut.getName();
-    String _substring = _name.substring(0, 1);
-    String _upperCase = _substring.toUpperCase();
-    String _name_1 = attribut.getName();
-    String _substring_1 = _name_1.substring(1);
-    String _plus = (_upperCase + _substring_1);
-    _builder.append(_plus, "");
+    String _firstUpper = StringExtensions.toFirstUpper(_name);
+    _builder.append(_firstUpper, "");
     _builder.append("(");
     Type _type = attribut.getType();
-    String _name_2 = _type.getName();
-    _builder.append(_name_2, "");
+    String _name_1 = _type.getName();
+    _builder.append(_name_1, "");
     _builder.append(" ");
-    String _name_3 = attribut.getName();
-    _builder.append(_name_3, "");
+    String _name_2 = attribut.getName();
+    _builder.append(_name_2, "");
     _builder.append("){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("this.");
+    String _name_3 = attribut.getName();
+    _builder.append(_name_3, "\t");
+    _builder.append(" = ");
     String _name_4 = attribut.getName();
     _builder.append(_name_4, "\t");
-    _builder.append(" = ");
-    String _name_5 = attribut.getName();
-    _builder.append(_name_5, "\t");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence genererHeritage(final Classe classe) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _herite = classe.getHerite();
+      boolean _notEquals = (!Objects.equal(_herite, null));
+      if (_notEquals) {
+        _builder.append("extends ");
+        String _herite_1 = classe.getHerite();
+        _builder.append(_herite_1, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence genererMain(final String titre) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public static void ");
+    _builder.append(titre, "");
+    _builder.append("() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Point p1 = new Point ();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("p1.setX(3); ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("p1.setY(4);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Point3D p2 = new Point3D() ;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("p2.setX(3); ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("p2.setY(4); ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("p2.setZ(5);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("System.out.println(String.format(\"(%d, %d, %d )\",p2.getX(), p2.getY(), p2.getZ())); //résultat : (3, 4, 5)");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;

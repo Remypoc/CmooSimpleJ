@@ -27,18 +27,31 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Model");
-		private final Assignment cClassesAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cClassesClasseParserRuleCall_0 = (RuleCall)cClassesAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cClassesAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cClassesClasseParserRuleCall_0_0 = (RuleCall)cClassesAssignment_0.eContents().get(0);
+		private final Assignment cProgramAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cProgramProgramParserRuleCall_1_0 = (RuleCall)cProgramAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	classes+=Classe*;
+		//	classes+=Classe*
+		//	program=Program?;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//classes+=Classe* program=Program?
+		public Group getGroup() { return cGroup; }
+		
 		//classes+=Classe*
-		public Assignment getClassesAssignment() { return cClassesAssignment; }
+		public Assignment getClassesAssignment_0() { return cClassesAssignment_0; }
 		
 		//Classe
-		public RuleCall getClassesClasseParserRuleCall_0() { return cClassesClasseParserRuleCall_0; }
+		public RuleCall getClassesClasseParserRuleCall_0_0() { return cClassesClasseParserRuleCall_0_0; }
+		
+		//program=Program?
+		public Assignment getProgramAssignment_1() { return cProgramAssignment_1; }
+		
+		//Program
+		public RuleCall getProgramProgramParserRuleCall_1_0() { return cProgramProgramParserRuleCall_1_0; }
 	}
 	public class ClasseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Classe");
@@ -55,12 +68,16 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cAttributsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
 		private final RuleCall cAttributsAttributParserRuleCall_3_1_1_0 = (RuleCall)cAttributsAssignment_3_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cColonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cHeriteAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cHeriteIDTerminalRuleCall_5_1_0 = (RuleCall)cHeriteAssignment_5_1.eContents().get(0);
 		
 		//Classe:
-		//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")";
+		//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" herite=ID)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")"
+		//"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" herite=ID)?
 		public Group getGroup() { return cGroup; }
 		
 		//"class"
@@ -98,6 +115,18 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		
+		//(":" herite=ID)?
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//":"
+		public Keyword getColonKeyword_5_0() { return cColonKeyword_5_0; }
+		
+		//herite=ID
+		public Assignment getHeriteAssignment_5_1() { return cHeriteAssignment_5_1; }
+		
+		//ID
+		public RuleCall getHeriteIDTerminalRuleCall_5_1_0() { return cHeriteIDTerminalRuleCall_5_1_0; }
 	}
 	public class AttributElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Attribut");
@@ -153,6 +182,29 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
+	public class ProgramElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Program");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cProgramKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//Program:
+		//	"program" name=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"program" name=ID
+		public Group getGroup() { return cGroup; }
+		
+		//"program"
+		public Keyword getProgramKeyword_0() { return cProgramKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
 	
 	public class AccesElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Acces");
@@ -195,6 +247,7 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	private final AttributElements pAttribut;
 	private final AccesElements eAcces;
 	private final TypeElements pType;
+	private final ProgramElements pProgram;
 	
 	private final Grammar grammar;
 	
@@ -210,6 +263,7 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAttribut = new AttributElements();
 		this.eAcces = new AccesElements();
 		this.pType = new TypeElements();
+		this.pProgram = new ProgramElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -240,7 +294,8 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//	classes+=Classe*;
+	//	classes+=Classe*
+	//	program=Program?;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -250,7 +305,7 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Classe:
-	//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")";
+	//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" herite=ID)?;
 	public ClasseElements getClasseAccess() {
 		return pClasse;
 	}
@@ -287,6 +342,16 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getTypeRule() {
 		return getTypeAccess().getRule();
+	}
+	
+	//Program:
+	//	"program" name=ID;
+	public ProgramElements getProgramAccess() {
+		return pProgram;
+	}
+	
+	public ParserRule getProgramRule() {
+		return getProgramAccess().getRule();
 	}
 	
 	//terminal ID:

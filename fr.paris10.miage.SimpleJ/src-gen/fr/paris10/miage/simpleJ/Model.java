@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link fr.paris10.miage.simpleJ.Model#getClasses <em>Classes</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.Model#getProgram <em>Program</em>}</li>
  * </ul>
  *
  * @see fr.paris10.miage.simpleJ.SimpleJPackage#getModel()
@@ -40,5 +41,31 @@ public interface Model extends EObject
    * @generated
    */
   EList<Classe> getClasses();
+
+  /**
+   * Returns the value of the '<em><b>Program</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Program</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Program</em>' containment reference.
+   * @see #setProgram(Program)
+   * @see fr.paris10.miage.simpleJ.SimpleJPackage#getModel_Program()
+   * @model containment="true"
+   * @generated
+   */
+  Program getProgram();
+
+  /**
+   * Sets the value of the '{@link fr.paris10.miage.simpleJ.Model#getProgram <em>Program</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Program</em>' containment reference.
+   * @see #getProgram()
+   * @generated
+   */
+  void setProgram(Program value);
 
 } // Model

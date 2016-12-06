@@ -36,18 +36,24 @@ public class SimpleJParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getAccesAccess().getAlternatives(), "rule__Acces__Alternatives");
+					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 					put(grammarAccess.getClasseAccess().getGroup(), "rule__Classe__Group__0");
 					put(grammarAccess.getClasseAccess().getGroup_3(), "rule__Classe__Group_3__0");
 					put(grammarAccess.getClasseAccess().getGroup_3_1(), "rule__Classe__Group_3_1__0");
+					put(grammarAccess.getClasseAccess().getGroup_5(), "rule__Classe__Group_5__0");
 					put(grammarAccess.getAttributAccess().getGroup(), "rule__Attribut__Group__0");
-					put(grammarAccess.getModelAccess().getClassesAssignment(), "rule__Model__ClassesAssignment");
+					put(grammarAccess.getProgramAccess().getGroup(), "rule__Program__Group__0");
+					put(grammarAccess.getModelAccess().getClassesAssignment_0(), "rule__Model__ClassesAssignment_0");
+					put(grammarAccess.getModelAccess().getProgramAssignment_1(), "rule__Model__ProgramAssignment_1");
 					put(grammarAccess.getClasseAccess().getNameAssignment_1(), "rule__Classe__NameAssignment_1");
 					put(grammarAccess.getClasseAccess().getAttributsAssignment_3_0(), "rule__Classe__AttributsAssignment_3_0");
 					put(grammarAccess.getClasseAccess().getAttributsAssignment_3_1_1(), "rule__Classe__AttributsAssignment_3_1_1");
+					put(grammarAccess.getClasseAccess().getHeriteAssignment_5_1(), "rule__Classe__HeriteAssignment_5_1");
 					put(grammarAccess.getAttributAccess().getAccesAssignment_0(), "rule__Attribut__AccesAssignment_0");
 					put(grammarAccess.getAttributAccess().getNameAssignment_1(), "rule__Attribut__NameAssignment_1");
 					put(grammarAccess.getAttributAccess().getTypeAssignment_3(), "rule__Attribut__TypeAssignment_3");
 					put(grammarAccess.getTypeAccess().getNameAssignment(), "rule__Type__NameAssignment");
+					put(grammarAccess.getProgramAccess().getNameAssignment_1(), "rule__Program__NameAssignment_1");
 				}
 			};
 		}

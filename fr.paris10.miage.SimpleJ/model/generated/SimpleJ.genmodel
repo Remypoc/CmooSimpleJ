@@ -13,10 +13,12 @@
     </genEnums>
     <genClasses ecoreClass="SimpleJ.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Model/classes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Model/program"/>
     </genClasses>
     <genClasses ecoreClass="SimpleJ.ecore#//Classe">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Classe/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Classe/attributs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Classe/herite"/>
     </genClasses>
     <genClasses ecoreClass="SimpleJ.ecore#//Attribut">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Attribut/acces"/>
@@ -25,6 +27,9 @@
     </genClasses>
     <genClasses ecoreClass="SimpleJ.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Type/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleJ.ecore#//Program">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Program/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

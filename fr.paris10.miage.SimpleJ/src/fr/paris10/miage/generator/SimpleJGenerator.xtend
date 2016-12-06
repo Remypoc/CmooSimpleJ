@@ -10,6 +10,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import fr.paris10.miage.simpleJ.Classe
 import fr.paris10.miage.simpleJ.Attribut
 import fr.paris10.miage.simpleJ.Acces
+import fr.paris10.miage.simpleJ.Program
 
 /**
  * Generates code from your model files on save.
@@ -25,15 +26,20 @@ class SimpleJGenerator extends AbstractGenerator {
 //				.map[name]
 //				.join(', '))
 
+		val programs = resource.allContents.filter(typeof(Program)).toSet
+		for(Program program : programs) {
+			fsa.generateFile(program.name + ".java", genererMain(program.name))
+		}
+	
 		val classes = resource.allContents.filter(typeof(Classe)).toSet
 		for(Classe classe : classes) {
-			fsa.generateFile(classe.name + ".java", genererJava(classe.name, genererAttributs(resource, classe)))
+			fsa.generateFile(classe.name + ".java", genererJava(classe.name, genererAttributs(resource, classe), classe))
 		}
 	}
 	
 	//Template de nos pages html
-	def genererJava(String nom, String content) '''
-	public class «nom» {
+	def genererJava(String nom, String content, Classe classe) '''
+	public class «nom» «genererHeritage(classe)»{
 		
 		«content»
 	}
@@ -62,14 +68,34 @@ class SimpleJGenerator extends AbstractGenerator {
 	
 	def genererGetter(Attribut attribut) '''
 		
-		public «attribut.type.name» get«attribut.name.substring(0, 1).toUpperCase() + attribut.name.substring(1)»()
+		public «attribut.type.name» get«attribut.name.toFirstUpper()»()
 			return «attribut.name»;
 		}
 	'''
 	
 	def genererSetter(Attribut attribut) '''
-		public void set«attribut.name.substring(0, 1).toUpperCase() + attribut.name.substring(1)»(«attribut.type.name» «attribut.name»){
+		public void set«attribut.name.toFirstUpper()»(«attribut.type.name» «attribut.name»){
 			this.«attribut.name» = «attribut.name»;
 		}
+	'''
+	
+	def genererHeritage(Classe classe)'''
+		«IF classe.herite != null»
+			extends «classe.herite»
+		«ENDIF»
+	'''
+	
+	def genererMain(String titre) '''
+	public static void «titre»() {
+		
+		Point p1 = new Point ();
+		p1.setX(3); 
+		p1.setY(4);
+		Point3D p2 = new Point3D() ;
+		p2.setX(3); 
+		p2.setY(4); 
+		p2.setZ(5);
+		System.out.println(String.format("(%d, %d, %d )",p2.getX(), p2.getY(), p2.getZ())); //résultat : (3, 4, 5)
+	}
 	'''
 }

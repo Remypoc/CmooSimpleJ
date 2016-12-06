@@ -78,13 +78,22 @@ public interface SimpleJPackage extends EPackage
   int MODEL__CLASSES = 0;
 
   /**
+   * The feature id for the '<em><b>Program</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__PROGRAM = 1;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 1;
+  int MODEL_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link fr.paris10.miage.simpleJ.impl.ClasseImpl <em>Classe</em>}' class.
@@ -115,13 +124,22 @@ public interface SimpleJPackage extends EPackage
   int CLASSE__ATTRIBUTS = 1;
 
   /**
+   * The feature id for the '<em><b>Herite</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASSE__HERITE = 2;
+
+  /**
    * The number of structural features of the '<em>Classe</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLASSE_FEATURE_COUNT = 2;
+  int CLASSE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link fr.paris10.miage.simpleJ.impl.AttributImpl <em>Attribut</em>}' class.
@@ -198,6 +216,34 @@ public interface SimpleJPackage extends EPackage
   int TYPE_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link fr.paris10.miage.simpleJ.impl.ProgramImpl <em>Program</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see fr.paris10.miage.simpleJ.impl.ProgramImpl
+   * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getProgram()
+   * @generated
+   */
+  int PROGRAM = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROGRAM__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Program</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROGRAM_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link fr.paris10.miage.simpleJ.Acces <em>Acces</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -205,7 +251,7 @@ public interface SimpleJPackage extends EPackage
    * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getAcces()
    * @generated
    */
-  int ACCES = 4;
+  int ACCES = 5;
 
 
   /**
@@ -228,6 +274,17 @@ public interface SimpleJPackage extends EPackage
    * @generated
    */
   EReference getModel_Classes();
+
+  /**
+   * Returns the meta object for the containment reference '{@link fr.paris10.miage.simpleJ.Model#getProgram <em>Program</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Program</em>'.
+   * @see fr.paris10.miage.simpleJ.Model#getProgram()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Program();
 
   /**
    * Returns the meta object for class '{@link fr.paris10.miage.simpleJ.Classe <em>Classe</em>}'.
@@ -260,6 +317,17 @@ public interface SimpleJPackage extends EPackage
    * @generated
    */
   EReference getClasse_Attributs();
+
+  /**
+   * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Classe#getHerite <em>Herite</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Herite</em>'.
+   * @see fr.paris10.miage.simpleJ.Classe#getHerite()
+   * @see #getClasse()
+   * @generated
+   */
+  EAttribute getClasse_Herite();
 
   /**
    * Returns the meta object for class '{@link fr.paris10.miage.simpleJ.Attribut <em>Attribut</em>}'.
@@ -326,6 +394,27 @@ public interface SimpleJPackage extends EPackage
   EAttribute getType_Name();
 
   /**
+   * Returns the meta object for class '{@link fr.paris10.miage.simpleJ.Program <em>Program</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Program</em>'.
+   * @see fr.paris10.miage.simpleJ.Program
+   * @generated
+   */
+  EClass getProgram();
+
+  /**
+   * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Program#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see fr.paris10.miage.simpleJ.Program#getName()
+   * @see #getProgram()
+   * @generated
+   */
+  EAttribute getProgram_Name();
+
+  /**
    * Returns the meta object for enum '{@link fr.paris10.miage.simpleJ.Acces <em>Acces</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -377,6 +466,14 @@ public interface SimpleJPackage extends EPackage
     EReference MODEL__CLASSES = eINSTANCE.getModel_Classes();
 
     /**
+     * The meta object literal for the '<em><b>Program</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__PROGRAM = eINSTANCE.getModel_Program();
+
+    /**
      * The meta object literal for the '{@link fr.paris10.miage.simpleJ.impl.ClasseImpl <em>Classe</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -401,6 +498,14 @@ public interface SimpleJPackage extends EPackage
      * @generated
      */
     EReference CLASSE__ATTRIBUTS = eINSTANCE.getClasse_Attributs();
+
+    /**
+     * The meta object literal for the '<em><b>Herite</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CLASSE__HERITE = eINSTANCE.getClasse_Herite();
 
     /**
      * The meta object literal for the '{@link fr.paris10.miage.simpleJ.impl.AttributImpl <em>Attribut</em>}' class.
@@ -453,6 +558,24 @@ public interface SimpleJPackage extends EPackage
      * @generated
      */
     EAttribute TYPE__NAME = eINSTANCE.getType_Name();
+
+    /**
+     * The meta object literal for the '{@link fr.paris10.miage.simpleJ.impl.ProgramImpl <em>Program</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.paris10.miage.simpleJ.impl.ProgramImpl
+     * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getProgram()
+     * @generated
+     */
+    EClass PROGRAM = eINSTANCE.getProgram();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROGRAM__NAME = eINSTANCE.getProgram_Name();
 
     /**
      * The meta object literal for the '{@link fr.paris10.miage.simpleJ.Acces <em>Acces</em>}' enum.

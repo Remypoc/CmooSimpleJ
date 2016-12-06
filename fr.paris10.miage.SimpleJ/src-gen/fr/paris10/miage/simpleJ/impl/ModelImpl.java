@@ -5,10 +5,12 @@ package fr.paris10.miage.simpleJ.impl;
 
 import fr.paris10.miage.simpleJ.Classe;
 import fr.paris10.miage.simpleJ.Model;
+import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.SimpleJPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -16,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -30,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link fr.paris10.miage.simpleJ.impl.ModelImpl#getClasses <em>Classes</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.impl.ModelImpl#getProgram <em>Program</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +49,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected EList<Classe> classes;
+
+  /**
+   * The cached value of the '{@link #getProgram() <em>Program</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProgram()
+   * @generated
+   * @ordered
+   */
+  protected Program program;
 
   /**
    * <!-- begin-user-doc -->
@@ -86,6 +100,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public Program getProgram()
+  {
+    return program;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetProgram(Program newProgram, NotificationChain msgs)
+  {
+    Program oldProgram = program;
+    program = newProgram;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimpleJPackage.MODEL__PROGRAM, oldProgram, newProgram);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setProgram(Program newProgram)
+  {
+    if (newProgram != program)
+    {
+      NotificationChain msgs = null;
+      if (program != null)
+        msgs = ((InternalEObject)program).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SimpleJPackage.MODEL__PROGRAM, null, msgs);
+      if (newProgram != null)
+        msgs = ((InternalEObject)newProgram).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SimpleJPackage.MODEL__PROGRAM, null, msgs);
+      msgs = basicSetProgram(newProgram, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.MODEL__PROGRAM, newProgram, newProgram));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -93,6 +155,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case SimpleJPackage.MODEL__CLASSES:
         return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
+      case SimpleJPackage.MODEL__PROGRAM:
+        return basicSetProgram(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,6 +173,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case SimpleJPackage.MODEL__CLASSES:
         return getClasses();
+      case SimpleJPackage.MODEL__PROGRAM:
+        return getProgram();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -128,6 +194,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         getClasses().clear();
         getClasses().addAll((Collection<? extends Classe>)newValue);
         return;
+      case SimpleJPackage.MODEL__PROGRAM:
+        setProgram((Program)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -145,6 +214,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SimpleJPackage.MODEL__CLASSES:
         getClasses().clear();
         return;
+      case SimpleJPackage.MODEL__PROGRAM:
+        setProgram((Program)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -161,6 +233,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case SimpleJPackage.MODEL__CLASSES:
         return classes != null && !classes.isEmpty();
+      case SimpleJPackage.MODEL__PROGRAM:
+        return program != null;
     }
     return super.eIsSet(featureID);
   }

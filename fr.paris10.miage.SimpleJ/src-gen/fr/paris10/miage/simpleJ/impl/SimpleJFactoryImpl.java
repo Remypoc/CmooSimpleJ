@@ -70,6 +70,7 @@ public class SimpleJFactoryImpl extends EFactoryImpl implements SimpleJFactory
       case SimpleJPackage.CLASSE: return createClasse();
       case SimpleJPackage.ATTRIBUT: return createAttribut();
       case SimpleJPackage.TYPE: return createType();
+      case SimpleJPackage.PROGRAM: return createProgram();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -151,6 +152,17 @@ public class SimpleJFactoryImpl extends EFactoryImpl implements SimpleJFactory
   {
     TypeImpl type = new TypeImpl();
     return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Program createProgram()
+  {
+    ProgramImpl program = new ProgramImpl();
+    return program;
   }
 
   /**

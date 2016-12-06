@@ -68,4 +68,14 @@ class SimpleJValidator extends AbstractSimpleJValidator {
 			error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__TYPE , ERROR_NAME)
 		}
 	}
+	
+	/* Vérifie si le nom d'une super classe est référencé */
+	@Check(NORMAL)
+	def checkExtendedClassType(Classe classe) {
+		if(classe.herite != null) {
+			if(!allTypes.contains(classe.herite)) {
+				error("Type inconnu !", SimpleJPackage.Literals.CLASSE__HERITE , ERROR_NAME)
+			}
+		}
+	}
 }
