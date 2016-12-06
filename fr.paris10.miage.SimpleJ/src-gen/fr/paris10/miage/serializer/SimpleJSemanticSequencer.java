@@ -85,7 +85,7 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Classe returns Classe
 	 *
 	 * Constraint:
-	 *     (name=ID (attributs+=Attribut attributs+=Attribut*)? herite=ID?)
+	 *     (name=ID (attributs+=Attribut attributs+=Attribut*)? parent=[Classe|ID]?)
 	 */
 	protected void sequence_Classe(ISerializationContext context, Classe semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

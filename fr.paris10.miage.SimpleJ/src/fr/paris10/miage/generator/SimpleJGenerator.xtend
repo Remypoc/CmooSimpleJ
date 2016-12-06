@@ -25,37 +25,61 @@ class SimpleJGenerator extends AbstractGenerator {
 //				.filter(typeof(Greeting))
 //				.map[name]
 //				.join(', '))
-
 		val programs = resource.allContents.filter(typeof(Program)).toSet
-		for(Program program : programs) {
+		for (Program program : programs) {
 			fsa.generateFile(program.name + ".java", genererMain(program.name))
 		}
-	
+
 		val classes = resource.allContents.filter(typeof(Classe)).toSet
-		for(Classe classe : classes) {
-			fsa.generateFile(classe.name + ".java", genererJava(classe.name, genererAttributs(resource, classe), classe))
+		for (Classe classe : classes) {
+			fsa.generateFile(classe.name + ".java",
+				genererJava(classe.name, genererAttributs(resource, classe), classe))
 		}
 	}
-	
-	//Template de nos pages html
-	def genererJava(String nom, String content, Classe classe) '''
-	public class «nom» «genererHeritage(classe)»{
-		
-		«content»
-	}
+
+	// Template de nos pages html
+	def genererJava(String nom, String attributs, Classe classe) '''
+		public class «nom» «genererHeritage(classe)»{
+			
+			«attributs»
+		}
 	'''
-	
+
 	def genererAttributs(Resource resource, Classe classe) {
 		return '''
 			«FOR attribut : classe.attributs»
 				private «attribut.type.name» «attribut.name»; //«attribut.acces»
 			«ENDFOR»
+			
+			«genererConstructeur(classe)»
 			«FOR attribut : classe.attributs»
 				«genererGetterSetter(attribut)»
 			«ENDFOR»
 		'''
 	}
+
+	//public «classe.name»(«FOR attribut : classe.attributs SEPARATOR', '»«ENDFOR») {
+	def genererConstructeur(Classe classe) '''
+		public «classe.name»(«classe.attributs.map[type.name + " " + name].join(', ')») {
+			«genererConstructeurParent(classe)»
+			«FOR attribut : classe.attributs»
+				this.«attribut.name» = «attribut.name»;
+			«ENDFOR»
+		}
+	'''
 	
+	def genererConstructeurParent(Classe classe)
+		'''«IF classe.parent != null»super(«classe.parent.attributs.map[name].join(', ')»)«ENDIF»'''
+
+	/*
+	 * public «classe.name»(«FOR attribut : classe.attributs»«attribut.type.name» «attribut.name», «ENDFOR») {
+	 * 		«FOR attribut : classe.attributs»
+	 * 			this.«attribut.name» = «attribut.name»;
+	 * 		«ENDFOR»
+	 * 	}
+	 * 
+	 * 
+	 */
 	def genererGetterSetter(Attribut attribut) '''
 		«IF attribut.acces == Acces.ACCESS_VAR»
 			«genererGetter(attribut)»
@@ -65,37 +89,34 @@ class SimpleJGenerator extends AbstractGenerator {
 			«genererGetter(attribut)»
 		«ENDIF»
 	'''
-	
+
 	def genererGetter(Attribut attribut) '''
 		
 		public «attribut.type.name» get«attribut.name.toFirstUpper()»()
 			return «attribut.name»;
 		}
 	'''
-	
+
 	def genererSetter(Attribut attribut) '''
 		public void set«attribut.name.toFirstUpper()»(«attribut.type.name» «attribut.name»){
 			this.«attribut.name» = «attribut.name»;
 		}
 	'''
-	
-	def genererHeritage(Classe classe)'''
-		«IF classe.herite != null»
-			extends «classe.herite»
-		«ENDIF»
-	'''
-	
+
+	def genererHeritage(Classe classe) '''
+		«IF classe.parent != null»extends «classe.parent.name»«ENDIF»'''
+
 	def genererMain(String titre) '''
-	public static void «titre»() {
-		
-		Point p1 = new Point ();
-		p1.setX(3); 
-		p1.setY(4);
-		Point3D p2 = new Point3D() ;
-		p2.setX(3); 
-		p2.setY(4); 
-		p2.setZ(5);
-		System.out.println(String.format("(%d, %d, %d )",p2.getX(), p2.getY(), p2.getZ())); //résultat : (3, 4, 5)
-	}
+		public static void «titre»() {
+			
+			Point p1 = new Point ();
+			p1.setX(3); 
+			p1.setY(4);
+			Point3D p2 = new Point3D() ;
+			p2.setX(3); 
+			p2.setY(4); 
+			p2.setZ(5);
+			System.out.println(String.format("(%d, %d, %d )",p2.getX(), p2.getY(), p2.getZ())); //résultat : (3, 4, 5)
+		}
 	'''
 }

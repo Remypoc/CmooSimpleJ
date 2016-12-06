@@ -1760,31 +1760,31 @@ public class InternalSimpleJParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Classe__Group_5__1__Impl"
-    // InternalSimpleJ.g:582:1: rule__Classe__Group_5__1__Impl : ( ( rule__Classe__HeriteAssignment_5_1 ) ) ;
+    // InternalSimpleJ.g:582:1: rule__Classe__Group_5__1__Impl : ( ( rule__Classe__ParentAssignment_5_1 ) ) ;
     public final void rule__Classe__Group_5__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSimpleJ.g:586:1: ( ( ( rule__Classe__HeriteAssignment_5_1 ) ) )
-            // InternalSimpleJ.g:587:1: ( ( rule__Classe__HeriteAssignment_5_1 ) )
+            // InternalSimpleJ.g:586:1: ( ( ( rule__Classe__ParentAssignment_5_1 ) ) )
+            // InternalSimpleJ.g:587:1: ( ( rule__Classe__ParentAssignment_5_1 ) )
             {
-            // InternalSimpleJ.g:587:1: ( ( rule__Classe__HeriteAssignment_5_1 ) )
-            // InternalSimpleJ.g:588:2: ( rule__Classe__HeriteAssignment_5_1 )
+            // InternalSimpleJ.g:587:1: ( ( rule__Classe__ParentAssignment_5_1 ) )
+            // InternalSimpleJ.g:588:2: ( rule__Classe__ParentAssignment_5_1 )
             {
-             before(grammarAccess.getClasseAccess().getHeriteAssignment_5_1()); 
-            // InternalSimpleJ.g:589:2: ( rule__Classe__HeriteAssignment_5_1 )
-            // InternalSimpleJ.g:589:3: rule__Classe__HeriteAssignment_5_1
+             before(grammarAccess.getClasseAccess().getParentAssignment_5_1()); 
+            // InternalSimpleJ.g:589:2: ( rule__Classe__ParentAssignment_5_1 )
+            // InternalSimpleJ.g:589:3: rule__Classe__ParentAssignment_5_1
             {
             pushFollow(FOLLOW_2);
-            rule__Classe__HeriteAssignment_5_1();
+            rule__Classe__ParentAssignment_5_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getClasseAccess().getHeriteAssignment_5_1()); 
+             after(grammarAccess.getClasseAccess().getParentAssignment_5_1()); 
 
             }
 
@@ -2487,22 +2487,30 @@ public class InternalSimpleJParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Classe__AttributsAssignment_3_1_1"
 
 
-    // $ANTLR start "rule__Classe__HeriteAssignment_5_1"
-    // InternalSimpleJ.g:835:1: rule__Classe__HeriteAssignment_5_1 : ( RULE_ID ) ;
-    public final void rule__Classe__HeriteAssignment_5_1() throws RecognitionException {
+    // $ANTLR start "rule__Classe__ParentAssignment_5_1"
+    // InternalSimpleJ.g:835:1: rule__Classe__ParentAssignment_5_1 : ( ( RULE_ID ) ) ;
+    public final void rule__Classe__ParentAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSimpleJ.g:839:1: ( ( RULE_ID ) )
-            // InternalSimpleJ.g:840:2: ( RULE_ID )
+            // InternalSimpleJ.g:839:1: ( ( ( RULE_ID ) ) )
+            // InternalSimpleJ.g:840:2: ( ( RULE_ID ) )
             {
-            // InternalSimpleJ.g:840:2: ( RULE_ID )
-            // InternalSimpleJ.g:841:3: RULE_ID
+            // InternalSimpleJ.g:840:2: ( ( RULE_ID ) )
+            // InternalSimpleJ.g:841:3: ( RULE_ID )
             {
-             before(grammarAccess.getClasseAccess().getHeriteIDTerminalRuleCall_5_1_0()); 
+             before(grammarAccess.getClasseAccess().getParentClasseCrossReference_5_1_0()); 
+            // InternalSimpleJ.g:842:3: ( RULE_ID )
+            // InternalSimpleJ.g:843:4: RULE_ID
+            {
+             before(grammarAccess.getClasseAccess().getParentClasseIDTerminalRuleCall_5_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getClasseAccess().getHeriteIDTerminalRuleCall_5_1_0()); 
+             after(grammarAccess.getClasseAccess().getParentClasseIDTerminalRuleCall_5_1_0_1()); 
+
+            }
+
+             after(grammarAccess.getClasseAccess().getParentClasseCrossReference_5_1_0()); 
 
             }
 
@@ -2521,21 +2529,21 @@ public class InternalSimpleJParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Classe__HeriteAssignment_5_1"
+    // $ANTLR end "rule__Classe__ParentAssignment_5_1"
 
 
     // $ANTLR start "rule__Attribut__AccesAssignment_0"
-    // InternalSimpleJ.g:850:1: rule__Attribut__AccesAssignment_0 : ( ruleAcces ) ;
+    // InternalSimpleJ.g:854:1: rule__Attribut__AccesAssignment_0 : ( ruleAcces ) ;
     public final void rule__Attribut__AccesAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSimpleJ.g:854:1: ( ( ruleAcces ) )
-            // InternalSimpleJ.g:855:2: ( ruleAcces )
+            // InternalSimpleJ.g:858:1: ( ( ruleAcces ) )
+            // InternalSimpleJ.g:859:2: ( ruleAcces )
             {
-            // InternalSimpleJ.g:855:2: ( ruleAcces )
-            // InternalSimpleJ.g:856:3: ruleAcces
+            // InternalSimpleJ.g:859:2: ( ruleAcces )
+            // InternalSimpleJ.g:860:3: ruleAcces
             {
              before(grammarAccess.getAttributAccess().getAccesAccesEnumRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -2566,17 +2574,17 @@ public class InternalSimpleJParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Attribut__NameAssignment_1"
-    // InternalSimpleJ.g:865:1: rule__Attribut__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalSimpleJ.g:869:1: rule__Attribut__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Attribut__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSimpleJ.g:869:1: ( ( RULE_ID ) )
-            // InternalSimpleJ.g:870:2: ( RULE_ID )
+            // InternalSimpleJ.g:873:1: ( ( RULE_ID ) )
+            // InternalSimpleJ.g:874:2: ( RULE_ID )
             {
-            // InternalSimpleJ.g:870:2: ( RULE_ID )
-            // InternalSimpleJ.g:871:3: RULE_ID
+            // InternalSimpleJ.g:874:2: ( RULE_ID )
+            // InternalSimpleJ.g:875:3: RULE_ID
             {
              before(grammarAccess.getAttributAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -2603,17 +2611,17 @@ public class InternalSimpleJParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Attribut__TypeAssignment_3"
-    // InternalSimpleJ.g:880:1: rule__Attribut__TypeAssignment_3 : ( ruleType ) ;
+    // InternalSimpleJ.g:884:1: rule__Attribut__TypeAssignment_3 : ( ruleType ) ;
     public final void rule__Attribut__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSimpleJ.g:884:1: ( ( ruleType ) )
-            // InternalSimpleJ.g:885:2: ( ruleType )
+            // InternalSimpleJ.g:888:1: ( ( ruleType ) )
+            // InternalSimpleJ.g:889:2: ( ruleType )
             {
-            // InternalSimpleJ.g:885:2: ( ruleType )
-            // InternalSimpleJ.g:886:3: ruleType
+            // InternalSimpleJ.g:889:2: ( ruleType )
+            // InternalSimpleJ.g:890:3: ruleType
             {
              before(grammarAccess.getAttributAccess().getTypeTypeParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -2644,17 +2652,17 @@ public class InternalSimpleJParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Type__NameAssignment"
-    // InternalSimpleJ.g:895:1: rule__Type__NameAssignment : ( RULE_ID ) ;
+    // InternalSimpleJ.g:899:1: rule__Type__NameAssignment : ( RULE_ID ) ;
     public final void rule__Type__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSimpleJ.g:899:1: ( ( RULE_ID ) )
-            // InternalSimpleJ.g:900:2: ( RULE_ID )
+            // InternalSimpleJ.g:903:1: ( ( RULE_ID ) )
+            // InternalSimpleJ.g:904:2: ( RULE_ID )
             {
-            // InternalSimpleJ.g:900:2: ( RULE_ID )
-            // InternalSimpleJ.g:901:3: RULE_ID
+            // InternalSimpleJ.g:904:2: ( RULE_ID )
+            // InternalSimpleJ.g:905:3: RULE_ID
             {
              before(grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -2681,17 +2689,17 @@ public class InternalSimpleJParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Program__NameAssignment_1"
-    // InternalSimpleJ.g:910:1: rule__Program__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalSimpleJ.g:914:1: rule__Program__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Program__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSimpleJ.g:914:1: ( ( RULE_ID ) )
-            // InternalSimpleJ.g:915:2: ( RULE_ID )
+            // InternalSimpleJ.g:918:1: ( ( RULE_ID ) )
+            // InternalSimpleJ.g:919:2: ( RULE_ID )
             {
-            // InternalSimpleJ.g:915:2: ( RULE_ID )
-            // InternalSimpleJ.g:916:3: RULE_ID
+            // InternalSimpleJ.g:919:2: ( RULE_ID )
+            // InternalSimpleJ.g:920:3: RULE_ID
             {
              before(grammarAccess.getProgramAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 

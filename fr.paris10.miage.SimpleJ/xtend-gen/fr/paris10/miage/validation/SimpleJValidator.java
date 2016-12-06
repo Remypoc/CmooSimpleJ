@@ -3,7 +3,6 @@
  */
 package fr.paris10.miage.validation;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
@@ -99,23 +98,6 @@ public class SimpleJValidator extends AbstractSimpleJValidator {
     boolean _not = (!_contains);
     if (_not) {
       this.error("Type inconnu !", SimpleJPackage.Literals.ATTRIBUT__TYPE, SimpleJValidator.ERROR_NAME);
-    }
-  }
-  
-  /**
-   * Vérifie si le nom d'une super classe est référencé
-   */
-  @Check(CheckType.NORMAL)
-  public void checkExtendedClassType(final Classe classe) {
-    String _herite = classe.getHerite();
-    boolean _notEquals = (!Objects.equal(_herite, null));
-    if (_notEquals) {
-      String _herite_1 = classe.getHerite();
-      boolean _contains = this.allTypes.contains(_herite_1);
-      boolean _not = (!_contains);
-      if (_not) {
-        this.error("Type inconnu !", SimpleJPackage.Literals.CLASSE__HERITE, SimpleJValidator.ERROR_NAME);
-      }
     }
   }
 }

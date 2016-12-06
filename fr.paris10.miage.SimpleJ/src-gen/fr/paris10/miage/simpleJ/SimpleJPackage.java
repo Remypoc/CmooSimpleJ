@@ -124,13 +124,13 @@ public interface SimpleJPackage extends EPackage
   int CLASSE__ATTRIBUTS = 1;
 
   /**
-   * The feature id for the '<em><b>Herite</b></em>' attribute.
+   * The feature id for the '<em><b>Parent</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLASSE__HERITE = 2;
+  int CLASSE__PARENT = 2;
 
   /**
    * The number of structural features of the '<em>Classe</em>' class.
@@ -319,15 +319,15 @@ public interface SimpleJPackage extends EPackage
   EReference getClasse_Attributs();
 
   /**
-   * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Classe#getHerite <em>Herite</em>}'.
+   * Returns the meta object for the reference '{@link fr.paris10.miage.simpleJ.Classe#getParent <em>Parent</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Herite</em>'.
-   * @see fr.paris10.miage.simpleJ.Classe#getHerite()
+   * @return the meta object for the reference '<em>Parent</em>'.
+   * @see fr.paris10.miage.simpleJ.Classe#getParent()
    * @see #getClasse()
    * @generated
    */
-  EAttribute getClasse_Herite();
+  EReference getClasse_Parent();
 
   /**
    * Returns the meta object for class '{@link fr.paris10.miage.simpleJ.Attribut <em>Attribut</em>}'.
@@ -500,12 +500,12 @@ public interface SimpleJPackage extends EPackage
     EReference CLASSE__ATTRIBUTS = eINSTANCE.getClasse_Attributs();
 
     /**
-     * The meta object literal for the '<em><b>Herite</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CLASSE__HERITE = eINSTANCE.getClasse_Herite();
+    EReference CLASSE__PARENT = eINSTANCE.getClasse_Parent();
 
     /**
      * The meta object literal for the '{@link fr.paris10.miage.simpleJ.impl.AttributImpl <em>Attribut</em>}' class.

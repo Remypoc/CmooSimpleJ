@@ -585,9 +585,9 @@ rule__Classe__Group_5__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClasseAccess().getHeriteAssignment_5_1()); }
-	(rule__Classe__HeriteAssignment_5_1)
-	{ after(grammarAccess.getClasseAccess().getHeriteAssignment_5_1()); }
+	{ before(grammarAccess.getClasseAccess().getParentAssignment_5_1()); }
+	(rule__Classe__ParentAssignment_5_1)
+	{ after(grammarAccess.getClasseAccess().getParentAssignment_5_1()); }
 )
 ;
 finally {
@@ -832,15 +832,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Classe__HeriteAssignment_5_1
+rule__Classe__ParentAssignment_5_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClasseAccess().getHeriteIDTerminalRuleCall_5_1_0()); }
-		RULE_ID
-		{ after(grammarAccess.getClasseAccess().getHeriteIDTerminalRuleCall_5_1_0()); }
+		{ before(grammarAccess.getClasseAccess().getParentClasseCrossReference_5_1_0()); }
+		(
+			{ before(grammarAccess.getClasseAccess().getParentClasseIDTerminalRuleCall_5_1_0_1()); }
+			RULE_ID
+			{ after(grammarAccess.getClasseAccess().getParentClasseIDTerminalRuleCall_5_1_0_1()); }
+		)
+		{ after(grammarAccess.getClasseAccess().getParentClasseCrossReference_5_1_0()); }
 	)
 ;
 finally {

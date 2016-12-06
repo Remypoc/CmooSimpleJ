@@ -8,6 +8,7 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
@@ -70,14 +71,21 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cColonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cHeriteAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cHeriteIDTerminalRuleCall_5_1_0 = (RuleCall)cHeriteAssignment_5_1.eContents().get(0);
+		private final Assignment cParentAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final CrossReference cParentClasseCrossReference_5_1_0 = (CrossReference)cParentAssignment_5_1.eContents().get(0);
+		private final RuleCall cParentClasseIDTerminalRuleCall_5_1_0_1 = (RuleCall)cParentClasseCrossReference_5_1_0.eContents().get(1);
 		
-		//Classe:
-		//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" herite=ID)?;
+		/// *
+		// * herite=[Classe]
+		// * A lieu de faire un validator pour s'assurer que le nom de classe hérité existe.
+		// * On défini notre attribut hérite comme une référence vers une classe, on ne pourra ainsi accéder qu'aux classe définies
+		// * dans le fichier de test.
+		// * 
+		// * / Classe:
+		//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" herite=ID)?
+		//"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?
 		public Group getGroup() { return cGroup; }
 		
 		//"class"
@@ -116,17 +124,20 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 		
-		//(":" herite=ID)?
+		//(":" parent=[Classe])?
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//":"
 		public Keyword getColonKeyword_5_0() { return cColonKeyword_5_0; }
 		
-		//herite=ID
-		public Assignment getHeriteAssignment_5_1() { return cHeriteAssignment_5_1; }
+		//parent=[Classe]
+		public Assignment getParentAssignment_5_1() { return cParentAssignment_5_1; }
+		
+		//[Classe]
+		public CrossReference getParentClasseCrossReference_5_1_0() { return cParentClasseCrossReference_5_1_0; }
 		
 		//ID
-		public RuleCall getHeriteIDTerminalRuleCall_5_1_0() { return cHeriteIDTerminalRuleCall_5_1_0; }
+		public RuleCall getParentClasseIDTerminalRuleCall_5_1_0_1() { return cParentClasseIDTerminalRuleCall_5_1_0_1; }
 	}
 	public class AttributElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Attribut");
@@ -304,8 +315,14 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		return getModelAccess().getRule();
 	}
 	
-	//Classe:
-	//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" herite=ID)?;
+	/// *
+	// * herite=[Classe]
+	// * A lieu de faire un validator pour s'assurer que le nom de classe hérité existe.
+	// * On défini notre attribut hérite comme une référence vers une classe, on ne pourra ainsi accéder qu'aux classe définies
+	// * dans le fichier de test.
+	// * 
+	// * / Classe:
+	//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?;
 	public ClasseElements getClasseAccess() {
 		return pClasse;
 	}

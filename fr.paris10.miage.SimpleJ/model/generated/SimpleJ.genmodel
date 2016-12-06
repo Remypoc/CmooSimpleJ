@@ -18,7 +18,7 @@
     <genClasses ecoreClass="SimpleJ.ecore#//Classe">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Classe/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Classe/attributs"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Classe/herite"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Classe/parent"/>
     </genClasses>
     <genClasses ecoreClass="SimpleJ.ecore#//Attribut">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Attribut/acces"/>

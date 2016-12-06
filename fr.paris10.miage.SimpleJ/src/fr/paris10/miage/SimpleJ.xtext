@@ -6,8 +6,15 @@ Model:
 	classes+=Classe*
 	(program=Program)?;
 	
+/*
+ * herite=[Classe]
+ * A lieu de faire un validator pour s'assurer que le nom de classe hérité existe.
+ * On défini notre attribut hérite comme une référence vers une classe, on ne pourra ainsi accéder qu'aux classe définies
+ * dans le fichier de test.
+ * 
+ */
 Classe:
-	"class" name=ID "(" (attributs+=Attribut(',' attributs+=Attribut)*)? ")" (":" herite=ID)?
+	"class" name=ID "(" (attributs+=Attribut(',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?
 ;
 
 Attribut:

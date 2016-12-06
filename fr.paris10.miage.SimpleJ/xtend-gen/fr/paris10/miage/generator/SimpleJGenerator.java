@@ -11,6 +11,7 @@ import fr.paris10.miage.simpleJ.Classe;
 import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.Type;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -20,7 +21,10 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -55,7 +59,7 @@ public class SimpleJGenerator extends AbstractGenerator {
     }
   }
   
-  public CharSequence genererJava(final String nom, final String content, final Classe classe) {
+  public CharSequence genererJava(final String nom, final String attributs, final Classe classe) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class ");
     _builder.append(nom, "");
@@ -67,7 +71,7 @@ public class SimpleJGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append(content, "\t");
+    _builder.append(attributs, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
@@ -92,6 +96,10 @@ public class SimpleJGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLine();
+    CharSequence _genererConstructeur = this.genererConstructeur(classe);
+    _builder.append(_genererConstructeur, "");
+    _builder.newLineIfNotEmpty();
     {
       EList<Attribut> _attributs_1 = classe.getAttributs();
       for(final Attribut attribut_1 : _attributs_1) {
@@ -103,6 +111,76 @@ public class SimpleJGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
+  public CharSequence genererConstructeur(final Classe classe) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public ");
+    String _name = classe.getName();
+    _builder.append(_name, "");
+    _builder.append("(");
+    EList<Attribut> _attributs = classe.getAttributs();
+    final Function1<Attribut, String> _function = (Attribut it) -> {
+      Type _type = it.getType();
+      String _name_1 = _type.getName();
+      String _plus = (_name_1 + " ");
+      String _name_2 = it.getName();
+      return (_plus + _name_2);
+    };
+    List<String> _map = ListExtensions.<Attribut, String>map(_attributs, _function);
+    String _join = IterableExtensions.join(_map, ", ");
+    _builder.append(_join, "");
+    _builder.append(") {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    CharSequence _genererConstructeurParent = this.genererConstructeurParent(classe);
+    _builder.append(_genererConstructeurParent, "\t");
+    _builder.newLineIfNotEmpty();
+    {
+      EList<Attribut> _attributs_1 = classe.getAttributs();
+      for(final Attribut attribut : _attributs_1) {
+        _builder.append("\t");
+        _builder.append("this.");
+        String _name_1 = attribut.getName();
+        _builder.append(_name_1, "\t");
+        _builder.append(" = ");
+        String _name_2 = attribut.getName();
+        _builder.append(_name_2, "\t");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence genererConstructeurParent(final Classe classe) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      Classe _parent = classe.getParent();
+      boolean _notEquals = (!Objects.equal(_parent, null));
+      if (_notEquals) {
+        _builder.append("super(");
+        Classe _parent_1 = classe.getParent();
+        EList<Attribut> _attributs = _parent_1.getAttributs();
+        final Function1<Attribut, String> _function = (Attribut it) -> {
+          return it.getName();
+        };
+        List<String> _map = ListExtensions.<Attribut, String>map(_attributs, _function);
+        String _join = IterableExtensions.join(_map, ", ");
+        _builder.append(_join, "");
+        _builder.append(")");
+      }
+    }
+    return _builder;
+  }
+  
+  /**
+   * public «classe.name»(«FOR attribut : classe.attributs»«attribut.type.name» «attribut.name», «ENDFOR») {
+   * 		«FOR attribut : classe.attributs»
+   * 			this.«attribut.name» = «attribut.name»;
+   * 		«ENDFOR»
+   * 	}
+   */
   public CharSequence genererGetterSetter(final Attribut attribut) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -185,13 +263,13 @@ public class SimpleJGenerator extends AbstractGenerator {
   public CharSequence genererHeritage(final Classe classe) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      String _herite = classe.getHerite();
-      boolean _notEquals = (!Objects.equal(_herite, null));
+      Classe _parent = classe.getParent();
+      boolean _notEquals = (!Objects.equal(_parent, null));
       if (_notEquals) {
         _builder.append("extends ");
-        String _herite_1 = classe.getHerite();
-        _builder.append(_herite_1, "");
-        _builder.newLineIfNotEmpty();
+        Classe _parent_1 = classe.getParent();
+        String _name = _parent_1.getName();
+        _builder.append(_name, "");
       }
     }
     return _builder;

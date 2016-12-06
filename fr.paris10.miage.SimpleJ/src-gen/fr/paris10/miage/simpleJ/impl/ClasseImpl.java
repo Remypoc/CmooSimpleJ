@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link fr.paris10.miage.simpleJ.impl.ClasseImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.impl.ClasseImpl#getAttributs <em>Attributs</em>}</li>
- *   <li>{@link fr.paris10.miage.simpleJ.impl.ClasseImpl#getHerite <em>Herite</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.impl.ClasseImpl#getParent <em>Parent</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,24 +71,14 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
   protected EList<Attribut> attributs;
 
   /**
-   * The default value of the '{@link #getHerite() <em>Herite</em>}' attribute.
+   * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getHerite()
+   * @see #getParent()
    * @generated
    * @ordered
    */
-  protected static final String HERITE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getHerite() <em>Herite</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getHerite()
-   * @generated
-   * @ordered
-   */
-  protected String herite = HERITE_EDEFAULT;
+  protected Classe parent;
 
   /**
    * <!-- begin-user-doc -->
@@ -153,9 +143,19 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getHerite()
+  public Classe getParent()
   {
-    return herite;
+    if (parent != null && parent.eIsProxy())
+    {
+      InternalEObject oldParent = (InternalEObject)parent;
+      parent = (Classe)eResolveProxy(oldParent);
+      if (parent != oldParent)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimpleJPackage.CLASSE__PARENT, oldParent, parent));
+      }
+    }
+    return parent;
   }
 
   /**
@@ -163,12 +163,22 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setHerite(String newHerite)
+  public Classe basicGetParent()
   {
-    String oldHerite = herite;
-    herite = newHerite;
+    return parent;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setParent(Classe newParent)
+  {
+    Classe oldParent = parent;
+    parent = newParent;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.CLASSE__HERITE, oldHerite, herite));
+      eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.CLASSE__PARENT, oldParent, parent));
   }
 
   /**
@@ -201,8 +211,9 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
         return getName();
       case SimpleJPackage.CLASSE__ATTRIBUTS:
         return getAttributs();
-      case SimpleJPackage.CLASSE__HERITE:
-        return getHerite();
+      case SimpleJPackage.CLASSE__PARENT:
+        if (resolve) return getParent();
+        return basicGetParent();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -225,8 +236,8 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
         getAttributs().clear();
         getAttributs().addAll((Collection<? extends Attribut>)newValue);
         return;
-      case SimpleJPackage.CLASSE__HERITE:
-        setHerite((String)newValue);
+      case SimpleJPackage.CLASSE__PARENT:
+        setParent((Classe)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -248,8 +259,8 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
       case SimpleJPackage.CLASSE__ATTRIBUTS:
         getAttributs().clear();
         return;
-      case SimpleJPackage.CLASSE__HERITE:
-        setHerite(HERITE_EDEFAULT);
+      case SimpleJPackage.CLASSE__PARENT:
+        setParent((Classe)null);
         return;
     }
     super.eUnset(featureID);
@@ -269,8 +280,8 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SimpleJPackage.CLASSE__ATTRIBUTS:
         return attributs != null && !attributs.isEmpty();
-      case SimpleJPackage.CLASSE__HERITE:
-        return HERITE_EDEFAULT == null ? herite != null : !HERITE_EDEFAULT.equals(herite);
+      case SimpleJPackage.CLASSE__PARENT:
+        return parent != null;
     }
     return super.eIsSet(featureID);
   }
@@ -288,8 +299,6 @@ public class ClasseImpl extends MinimalEObjectImpl.Container implements Classe
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", herite: ");
-    result.append(herite);
     result.append(')');
     return result.toString();
   }

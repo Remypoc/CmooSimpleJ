@@ -48,7 +48,7 @@ public class SimpleJParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClasseAccess().getNameAssignment_1(), "rule__Classe__NameAssignment_1");
 					put(grammarAccess.getClasseAccess().getAttributsAssignment_3_0(), "rule__Classe__AttributsAssignment_3_0");
 					put(grammarAccess.getClasseAccess().getAttributsAssignment_3_1_1(), "rule__Classe__AttributsAssignment_3_1_1");
-					put(grammarAccess.getClasseAccess().getHeriteAssignment_5_1(), "rule__Classe__HeriteAssignment_5_1");
+					put(grammarAccess.getClasseAccess().getParentAssignment_5_1(), "rule__Classe__ParentAssignment_5_1");
 					put(grammarAccess.getAttributAccess().getAccesAssignment_0(), "rule__Attribut__AccesAssignment_0");
 					put(grammarAccess.getAttributAccess().getNameAssignment_1(), "rule__Attribut__NameAssignment_1");
 					put(grammarAccess.getAttributAccess().getTypeAssignment_3(), "rule__Attribut__TypeAssignment_3");

@@ -217,19 +217,14 @@ ruleClasse returns [EObject current=null]
 			}
 			(
 				(
-					lv_herite_8_0=RULE_ID
-					{
-						newLeafNode(lv_herite_8_0, grammarAccess.getClasseAccess().getHeriteIDTerminalRuleCall_5_1_0());
-					}
 					{
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getClasseRule());
 						}
-						setWithLastConsumed(
-							$current,
-							"herite",
-							lv_herite_8_0,
-							"org.eclipse.xtext.common.Terminals.ID");
+					}
+					otherlv_8=RULE_ID
+					{
+						newLeafNode(otherlv_8, grammarAccess.getClasseAccess().getParentClasseCrossReference_5_1_0());
 					}
 				)
 			)

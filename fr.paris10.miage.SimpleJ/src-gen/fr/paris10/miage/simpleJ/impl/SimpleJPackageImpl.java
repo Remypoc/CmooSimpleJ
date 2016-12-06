@@ -198,9 +198,9 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getClasse_Herite()
+  public EReference getClasse_Parent()
   {
-    return (EAttribute)classeEClass.getEStructuralFeatures().get(2);
+    return (EReference)classeEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -330,7 +330,7 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
     classeEClass = createEClass(CLASSE);
     createEAttribute(classeEClass, CLASSE__NAME);
     createEReference(classeEClass, CLASSE__ATTRIBUTS);
-    createEAttribute(classeEClass, CLASSE__HERITE);
+    createEReference(classeEClass, CLASSE__PARENT);
 
     attributEClass = createEClass(ATTRIBUT);
     createEAttribute(attributEClass, ATTRIBUT__ACCES);
@@ -385,7 +385,7 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
     initEClass(classeEClass, Classe.class, "Classe", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getClasse_Name(), ecorePackage.getEString(), "name", null, 0, 1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getClasse_Attributs(), this.getAttribut(), null, "attributs", null, 0, -1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getClasse_Herite(), ecorePackage.getEString(), "herite", null, 0, 1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getClasse_Parent(), this.getClasse(), null, "parent", null, 0, 1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributEClass, Attribut.class, "Attribut", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttribut_Acces(), this.getAcces(), "acces", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
