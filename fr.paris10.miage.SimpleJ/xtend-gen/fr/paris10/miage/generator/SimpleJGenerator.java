@@ -3,10 +3,15 @@
  */
 package fr.paris10.miage.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
+import fr.paris10.miage.simpleJ.Acces;
+import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
+import fr.paris10.miage.simpleJ.Type;
 import java.util.Iterator;
 import java.util.Set;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -14,7 +19,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 /**
@@ -28,22 +32,143 @@ public class SimpleJGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterator<Classe> _filter = Iterators.<Classe>filter(_allContents, Classe.class);
-    final Function1<Classe, String> _function = (Classe it) -> {
-      return it.getName();
-    };
-    Iterator<String> _map = IteratorExtensions.<Classe, String>map(_filter, _function);
-    final Set<String> classes = IteratorExtensions.<String>toSet(_map);
-    for (final String nom : classes) {
-      CharSequence _genererJava = this.genererJava(nom);
-      fsa.generateFile((nom + ".java"), _genererJava);
+    final Set<Classe> classes = IteratorExtensions.<Classe>toSet(_filter);
+    for (final Classe classe : classes) {
+      String _name = classe.getName();
+      String _plus = (_name + ".java");
+      String _name_1 = classe.getName();
+      String _genererAttributs = this.genererAttributs(resource, classe);
+      CharSequence _genererJava = this.genererJava(_name_1, _genererAttributs);
+      fsa.generateFile(_plus, _genererJava);
     }
   }
   
-  public CharSequence genererJava(final String nom) {
+  public CharSequence genererJava(final String nom, final String content) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class ");
     _builder.append(nom, "");
     _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(content, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public String genererAttributs(final Resource resource, final Classe classe) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<Attribut> _attributs = classe.getAttributs();
+      for(final Attribut attribut : _attributs) {
+        _builder.append("private ");
+        Type _type = attribut.getType();
+        String _name = _type.getName();
+        _builder.append(_name, "");
+        _builder.append(" ");
+        String _name_1 = attribut.getName();
+        _builder.append(_name_1, "");
+        _builder.append("; //");
+        Acces _acces = attribut.getAcces();
+        _builder.append(_acces, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EList<Attribut> _attributs_1 = classe.getAttributs();
+      for(final Attribut attribut_1 : _attributs_1) {
+        CharSequence _genererGetterSetter = this.genererGetterSetter(attribut_1);
+        _builder.append(_genererGetterSetter, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
+  public CharSequence genererGetterSetter(final Attribut attribut) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      Acces _acces = attribut.getAcces();
+      boolean _equals = Objects.equal(_acces, Acces.ACCESS_VAR);
+      if (_equals) {
+        CharSequence _genererGetter = this.genererGetter(attribut);
+        _builder.append(_genererGetter, "");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        CharSequence _genererSetter = this.genererSetter(attribut);
+        _builder.append(_genererSetter, "");
+        _builder.newLineIfNotEmpty();
+      } else {
+        Acces _acces_1 = attribut.getAcces();
+        boolean _equals_1 = Objects.equal(_acces_1, Acces.ACCESS_CONST);
+        if (_equals_1) {
+          CharSequence _genererGetter_1 = this.genererGetter(attribut);
+          _builder.append(_genererGetter_1, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence genererGetter(final Attribut attribut) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("public ");
+    Type _type = attribut.getType();
+    String _name = _type.getName();
+    _builder.append(_name, "");
+    _builder.append(" get");
+    String _name_1 = attribut.getName();
+    String _substring = _name_1.substring(0, 1);
+    String _upperCase = _substring.toUpperCase();
+    String _name_2 = attribut.getName();
+    String _substring_1 = _name_2.substring(1);
+    String _plus = (_upperCase + _substring_1);
+    _builder.append(_plus, "");
+    _builder.append("()");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("return ");
+    String _name_3 = attribut.getName();
+    _builder.append(_name_3, "\t");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence genererSetter(final Attribut attribut) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public void set");
+    String _name = attribut.getName();
+    String _substring = _name.substring(0, 1);
+    String _upperCase = _substring.toUpperCase();
+    String _name_1 = attribut.getName();
+    String _substring_1 = _name_1.substring(1);
+    String _plus = (_upperCase + _substring_1);
+    _builder.append(_plus, "");
+    _builder.append("(");
+    Type _type = attribut.getType();
+    String _name_2 = _type.getName();
+    _builder.append(_name_2, "");
+    _builder.append(" ");
+    String _name_3 = attribut.getName();
+    _builder.append(_name_3, "");
+    _builder.append("){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("this.");
+    String _name_4 = attribut.getName();
+    _builder.append(_name_4, "\t");
+    _builder.append(" = ");
+    String _name_5 = attribut.getName();
+    _builder.append(_name_5, "\t");
+    _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();

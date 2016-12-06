@@ -8,6 +8,8 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import fr.paris10.miage.simpleJ.Classe
+import fr.paris10.miage.simpleJ.Attribut
+import fr.paris10.miage.simpleJ.Acces
 
 /**
  * Generates code from your model files on save.
@@ -23,15 +25,51 @@ class SimpleJGenerator extends AbstractGenerator {
 //				.map[name]
 //				.join(', '))
 
-		val classes = resource.allContents.filter(typeof(Classe)).map[name].toSet;
-		for(String nom : classes) {
-			fsa.generateFile(nom + ".java", genererJava(nom));
+		val classes = resource.allContents.filter(typeof(Classe)).toSet
+		for(Classe classe : classes) {
+			fsa.generateFile(classe.name + ".java", genererJava(classe.name, genererAttributs(resource, classe)))
 		}
 	}
 	
 	//Template de nos pages html
-	def genererJava(String nom) '''
+	def genererJava(String nom, String content) '''
 	public class «nom» {
+		
+		«content»
 	}
+	'''
+	
+	def genererAttributs(Resource resource, Classe classe) {
+		return '''
+			«FOR attribut : classe.attributs»
+				private «attribut.type.name» «attribut.name»; //«attribut.acces»
+			«ENDFOR»
+			«FOR attribut : classe.attributs»
+				«genererGetterSetter(attribut)»
+			«ENDFOR»
+		'''
+	}
+	
+	def genererGetterSetter(Attribut attribut) '''
+		«IF attribut.acces == Acces.ACCESS_VAR»
+			«genererGetter(attribut)»
+			
+			«genererSetter(attribut)»
+		«ELSEIF attribut.acces == Acces.ACCESS_CONST»
+			«genererGetter(attribut)»
+		«ENDIF»
+	'''
+	
+	def genererGetter(Attribut attribut) '''
+		
+		public «attribut.type.name» get«attribut.name.substring(0, 1).toUpperCase() + attribut.name.substring(1)»()
+			return «attribut.name»;
+		}
+	'''
+	
+	def genererSetter(Attribut attribut) '''
+		public void set«attribut.name.substring(0, 1).toUpperCase() + attribut.name.substring(1)»(«attribut.type.name» «attribut.name»){
+			this.«attribut.name» = «attribut.name»;
+		}
 	'''
 }
