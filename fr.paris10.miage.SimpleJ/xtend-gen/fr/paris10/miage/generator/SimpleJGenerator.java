@@ -56,8 +56,7 @@ public class SimpleJGenerator extends AbstractGenerator {
       String _plus_1 = (_name_2 + ".java");
       String _name_3 = classe.getName();
       String _genererAttributs = this.genererAttributs(resource, classe);
-      EList<Methode> _methodes = classe.getMethodes();
-      String _genererMethode = this.genererMethode(_methodes);
+      String _genererMethode = this.genererMethode(classe);
       CharSequence _genererJava = this.genererJava(_name_3, _genererAttributs, classe, _genererMethode);
       fsa.generateFile(_plus_1, _genererJava);
     }
@@ -118,15 +117,20 @@ public class SimpleJGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
+  /**
+   * public «classe.name»(«FOR attribut : classe.attributs SEPARATOR', '»«ENDFOR») {
+   * 
+   * «FOR attribut : classe.attributs» this.«attribut.name» = «attribut.name»; «ENDFOR»
+   * 
+   * «««classe.attributs.map[type.name + " " + name].join(', ')
+   * «««genererConstructeurParent(classe)»
+   */
   public CharSequence genererConstructeur(final Classe classe) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public ");
     String _name = classe.getName();
     _builder.append(_name, "");
     _builder.append("() {");
-    _builder.append("\t\t\t");
-    CharSequence _genererConstructeurParent = this.genererConstructeurParent(classe);
-    _builder.append(_genererConstructeurParent, "");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     return _builder;
@@ -249,6 +253,7 @@ public class SimpleJGenerator extends AbstractGenerator {
         Classe _parent_1 = classe.getParent();
         String _name = _parent_1.getName();
         _builder.append(_name, "");
+        _builder.append(" ");
       }
     }
     return _builder;
@@ -276,10 +281,12 @@ public class SimpleJGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public String genererMethode(final List<Methode> methodes) {
+  public String genererMethode(final Classe classe) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
     {
-      for(final Methode methode : methodes) {
+      EList<Methode> _methodes = classe.getMethodes();
+      for(final Methode methode : _methodes) {
         _builder.append("public ");
         {
           Type _type = methode.getType();
@@ -295,7 +302,19 @@ public class SimpleJGenerator extends AbstractGenerator {
         _builder.append(" ");
         String _name_1 = methode.getName();
         _builder.append(_name_1, "");
-        _builder.append("() {");
+        _builder.append("(");
+        EList<Attribut> _attributs = methode.getAttributs();
+        final Function1<Attribut, String> _function = (Attribut it) -> {
+          Type _type_2 = it.getType();
+          String _name_2 = _type_2.getName();
+          String _plus = (_name_2 + " ");
+          String _name_3 = it.getName();
+          return (_plus + _name_3);
+        };
+        List<String> _map = ListExtensions.<Attribut, String>map(_attributs, _function);
+        String _join = IterableExtensions.join(_map, ", ");
+        _builder.append(_join, "");
+        _builder.append(") {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         String _contenu = methode.getContenu();
@@ -303,6 +322,7 @@ public class SimpleJGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
       }
     }

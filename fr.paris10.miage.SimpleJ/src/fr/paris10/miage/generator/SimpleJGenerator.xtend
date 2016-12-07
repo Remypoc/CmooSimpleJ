@@ -11,8 +11,7 @@ import fr.paris10.miage.simpleJ.Classe
 import fr.paris10.miage.simpleJ.Attribut
 import fr.paris10.miage.simpleJ.Acces
 import fr.paris10.miage.simpleJ.Program
-import fr.paris10.miage.simpleJ.Methode
-import java.util.List
+import fr.paris10.miage.simpleJ.Delegation
 
 /**
  * Generates code from your model files on save.
@@ -36,7 +35,7 @@ class SimpleJGenerator extends AbstractGenerator {
 		val classes = resource.allContents.filter(typeof(Classe)).toSet
 		for (Classe classe : classes) {
 			fsa.generateFile(classe.name + ".java",
-				genererJava(classe.name, genererAttributs(resource, classe), classe, genererMethode(classe.methodes)))
+				genererJava(classe.name, genererAttributs(resource, classe), classe, genererMethode(classe)))
 		}
 	}
 
@@ -61,12 +60,17 @@ class SimpleJGenerator extends AbstractGenerator {
 			«ENDFOR»
 		'''
 	}
-
-	//public «classe.name»(«FOR attribut : classe.attributs SEPARATOR', '»«ENDFOR») {
-	//«FOR attribut : classe.attributs» this.«attribut.name» = «attribut.name»; «ENDFOR» 
+	
+	/*
+	 * public «classe.name»(«FOR attribut : classe.attributs SEPARATOR', '»«ENDFOR») {
+	 * 
+	 * «FOR attribut : classe.attributs» this.«attribut.name» = «attribut.name»; «ENDFOR»
+	 * 
+	 * «««classe.attributs.map[type.name + " " + name].join(', ') 
+	 * «««genererConstructeurParent(classe)»
+	 */
 	def genererConstructeur(Classe classe) '''
-		public «classe.name»() {«««classe.attributs.map[type.name + " " + name].join(', ') 
-			«genererConstructeurParent(classe)»
+		public «classe.name»() {
 		}''' 
 			
 	
@@ -106,7 +110,7 @@ class SimpleJGenerator extends AbstractGenerator {
 	'''
 
 	def genererHeritage(Classe classe) '''
-		«IF classe.parent != null»extends «classe.parent.name»«ENDIF»'''
+		«IF classe.parent != null»extends «classe.parent.name» «ENDIF»'''
 
 	def genererMain(String titre, String contenu) '''
 	public class «titre» {
@@ -117,14 +121,15 @@ class SimpleJGenerator extends AbstractGenerator {
 	}
 	'''
 	
-	def genererMethode(List<Methode> methodes) {
+	def genererMethode(Classe classe) {
 		return '''
-			«FOR methode : methodes»
-				public «IF methode.type != null»«methode.type.name»«ELSE»void«ENDIF» «methode.name»() {
-					«methode.contenu»
-				}
+		
+		«FOR methode : classe.methodes»
+			public «IF methode.type != null»«methode.type.name»«ELSE»void«ENDIF» «methode.name»(«methode.attributs.map[type.name + " " + name].join(', ')») {
+				«methode.contenu»
+			}
 				
-			«ENDFOR»
+		«ENDFOR»
 		'''
 	}
 }
