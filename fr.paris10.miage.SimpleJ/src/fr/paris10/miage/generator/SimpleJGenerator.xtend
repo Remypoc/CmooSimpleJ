@@ -12,6 +12,7 @@ import fr.paris10.miage.simpleJ.Attribut
 import fr.paris10.miage.simpleJ.Acces
 import fr.paris10.miage.simpleJ.Program
 import fr.paris10.miage.simpleJ.Methode
+import java.util.List
 
 /**
  * Generates code from your model files on save.
@@ -35,15 +36,16 @@ class SimpleJGenerator extends AbstractGenerator {
 		val classes = resource.allContents.filter(typeof(Classe)).toSet
 		for (Classe classe : classes) {
 			fsa.generateFile(classe.name + ".java",
-				genererJava(classe.name, genererAttributs(resource, classe), classe))
+				genererJava(classe.name, genererAttributs(resource, classe), classe, genererMethode(classe.methodes)))
 		}
 	}
 
 	// Template de nos pages html
-	def genererJava(String nom, String attributs, Classe classe) '''
+	def genererJava(String nom, String attributs, Classe classe, String methodes) '''
 		public class «nom» «genererHeritage(classe)»{
 			
 			«attributs»
+			«methodes»
 		}
 	'''
 
@@ -98,7 +100,7 @@ class SimpleJGenerator extends AbstractGenerator {
 	'''
 
 	def genererSetter(Attribut attribut) '''
-		public void set«attribut.name.toFirstUpper()»(«attribut.type.name» «attribut.name»){
+		public void set«attribut.name.toFirstUpper()»(«attribut.type.name» «attribut.name») {
 			this.«attribut.name» = «attribut.name»;
 		}
 	'''
@@ -115,7 +117,14 @@ class SimpleJGenerator extends AbstractGenerator {
 	}
 	'''
 	
-	def genererMethode(Methode method) '''
-		
-	'''
+	def genererMethode(List<Methode> methodes) {
+		return '''
+			«FOR methode : methodes»
+				public «IF methode.type != null»«methode.type.name»«ELSE»void«ENDIF» «methode.name»() {
+					«methode.contenu»
+				}
+				
+			«ENDFOR»
+		'''
+	}
 }

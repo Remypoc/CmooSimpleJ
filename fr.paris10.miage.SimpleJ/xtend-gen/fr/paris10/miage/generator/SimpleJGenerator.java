@@ -56,12 +56,14 @@ public class SimpleJGenerator extends AbstractGenerator {
       String _plus_1 = (_name_2 + ".java");
       String _name_3 = classe.getName();
       String _genererAttributs = this.genererAttributs(resource, classe);
-      CharSequence _genererJava = this.genererJava(_name_3, _genererAttributs, classe);
+      EList<Methode> _methodes = classe.getMethodes();
+      String _genererMethode = this.genererMethode(_methodes);
+      CharSequence _genererJava = this.genererJava(_name_3, _genererAttributs, classe, _genererMethode);
       fsa.generateFile(_plus_1, _genererJava);
     }
   }
   
-  public CharSequence genererJava(final String nom, final String attributs, final Classe classe) {
+  public CharSequence genererJava(final String nom, final String attributs, final Classe classe, final String methodes) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class ");
     _builder.append(nom, "");
@@ -74,6 +76,9 @@ public class SimpleJGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append(attributs, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append(methodes, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
@@ -218,7 +223,7 @@ public class SimpleJGenerator extends AbstractGenerator {
     _builder.append(" ");
     String _name_2 = attribut.getName();
     _builder.append(_name_2, "");
-    _builder.append("){");
+    _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("this.");
@@ -271,10 +276,36 @@ public class SimpleJGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence genererMethode(final Methode method) {
+  public String genererMethode(final List<Methode> methodes) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t\t");
-    _builder.newLine();
-    return _builder;
+    {
+      for(final Methode methode : methodes) {
+        _builder.append("public ");
+        {
+          Type _type = methode.getType();
+          boolean _notEquals = (!Objects.equal(_type, null));
+          if (_notEquals) {
+            Type _type_1 = methode.getType();
+            String _name = _type_1.getName();
+            _builder.append(_name, "");
+          } else {
+            _builder.append("void");
+          }
+        }
+        _builder.append(" ");
+        String _name_1 = methode.getName();
+        _builder.append(_name_1, "");
+        _builder.append("() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        String _contenu = methode.getContenu();
+        _builder.append(_contenu, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+      }
+    }
+    return _builder.toString();
   }
 }
