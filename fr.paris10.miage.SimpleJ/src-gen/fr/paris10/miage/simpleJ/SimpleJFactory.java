@@ -69,6 +69,24 @@ public interface SimpleJFactory extends EFactory
   Program createProgram();
 
   /**
+   * Returns a new object of class '<em>Methode</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Methode</em>'.
+   * @generated
+   */
+  Methode createMethode();
+
+  /**
+   * Returns a new object of class '<em>Delegation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Delegation</em>'.
+   * @generated
+   */
+  Delegation createDelegation();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

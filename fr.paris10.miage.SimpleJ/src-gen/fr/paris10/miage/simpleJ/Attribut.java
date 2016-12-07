@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link fr.paris10.miage.simpleJ.Attribut#getAcces <em>Acces</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.Attribut#getDelegue <em>Delegue</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.Attribut#getName <em>Name</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.Attribut#getType <em>Type</em>}</li>
  * </ul>
@@ -53,6 +54,32 @@ public interface Attribut extends EObject
    * @generated
    */
   void setAcces(Acces value);
+
+  /**
+   * Returns the value of the '<em><b>Delegue</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Delegue</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Delegue</em>' containment reference.
+   * @see #setDelegue(Delegation)
+   * @see fr.paris10.miage.simpleJ.SimpleJPackage#getAttribut_Delegue()
+   * @model containment="true"
+   * @generated
+   */
+  Delegation getDelegue();
+
+  /**
+   * Sets the value of the '{@link fr.paris10.miage.simpleJ.Attribut#getDelegue <em>Delegue</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Delegue</em>' containment reference.
+   * @see #getDelegue()
+   * @generated
+   */
+  void setDelegue(Delegation value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

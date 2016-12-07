@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link fr.paris10.miage.simpleJ.Program#getName <em>Name</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.Program#getContenu <em>Contenu</em>}</li>
  * </ul>
  *
  * @see fr.paris10.miage.simpleJ.SimpleJPackage#getProgram()
@@ -48,5 +49,31 @@ public interface Program extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Contenu</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Contenu</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Contenu</em>' attribute.
+   * @see #setContenu(String)
+   * @see fr.paris10.miage.simpleJ.SimpleJPackage#getProgram_Contenu()
+   * @model
+   * @generated
+   */
+  String getContenu();
+
+  /**
+   * Sets the value of the '{@link fr.paris10.miage.simpleJ.Program#getContenu <em>Contenu</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Contenu</em>' attribute.
+   * @see #getContenu()
+   * @generated
+   */
+  void setContenu(String value);
 
 } // Program

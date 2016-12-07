@@ -101,6 +101,16 @@ public class SimpleJAdapterFactory extends AdapterFactoryImpl
         return createProgramAdapter();
       }
       @Override
+      public Adapter caseMethode(Methode object)
+      {
+        return createMethodeAdapter();
+      }
+      @Override
+      public Adapter caseDelegation(Delegation object)
+      {
+        return createDelegationAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -193,6 +203,36 @@ public class SimpleJAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createProgramAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link fr.paris10.miage.simpleJ.Methode <em>Methode</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see fr.paris10.miage.simpleJ.Methode
+   * @generated
+   */
+  public Adapter createMethodeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link fr.paris10.miage.simpleJ.Delegation <em>Delegation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see fr.paris10.miage.simpleJ.Delegation
+   * @generated
+   */
+  public Adapter createDelegationAdapter()
   {
     return null;
   }

@@ -3,7 +3,7 @@
  */
 package fr.paris10.miage.simpleJ.impl;
 
-import fr.paris10.miage.simpleJ.Program;
+import fr.paris10.miage.simpleJ.Delegation;
 import fr.paris10.miage.simpleJ.SimpleJPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -15,19 +15,18 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Program</b></em>'.
+ * An implementation of the model object '<em><b>Delegation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link fr.paris10.miage.simpleJ.impl.ProgramImpl#getName <em>Name</em>}</li>
- *   <li>{@link fr.paris10.miage.simpleJ.impl.ProgramImpl#getContenu <em>Contenu</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.impl.DelegationImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
+public class DelegationImpl extends MinimalEObjectImpl.Container implements Delegation
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -50,31 +49,11 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getContenu() <em>Contenu</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getContenu()
-   * @generated
-   * @ordered
-   */
-  protected static final String CONTENU_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getContenu() <em>Contenu</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getContenu()
-   * @generated
-   * @ordered
-   */
-  protected String contenu = CONTENU_EDEFAULT;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ProgramImpl()
+  protected DelegationImpl()
   {
     super();
   }
@@ -87,7 +66,7 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
   @Override
   protected EClass eStaticClass()
   {
-    return SimpleJPackage.Literals.PROGRAM;
+    return SimpleJPackage.Literals.DELEGATION;
   }
 
   /**
@@ -110,30 +89,7 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.PROGRAM__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getContenu()
-  {
-    return contenu;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setContenu(String newContenu)
-  {
-    String oldContenu = contenu;
-    contenu = newContenu;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.PROGRAM__CONTENU, oldContenu, contenu));
+      eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.DELEGATION__NAME, oldName, name));
   }
 
   /**
@@ -146,10 +102,8 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
   {
     switch (featureID)
     {
-      case SimpleJPackage.PROGRAM__NAME:
+      case SimpleJPackage.DELEGATION__NAME:
         return getName();
-      case SimpleJPackage.PROGRAM__CONTENU:
-        return getContenu();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -164,11 +118,8 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
   {
     switch (featureID)
     {
-      case SimpleJPackage.PROGRAM__NAME:
+      case SimpleJPackage.DELEGATION__NAME:
         setName((String)newValue);
-        return;
-      case SimpleJPackage.PROGRAM__CONTENU:
-        setContenu((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -184,11 +135,8 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
   {
     switch (featureID)
     {
-      case SimpleJPackage.PROGRAM__NAME:
+      case SimpleJPackage.DELEGATION__NAME:
         setName(NAME_EDEFAULT);
-        return;
-      case SimpleJPackage.PROGRAM__CONTENU:
-        setContenu(CONTENU_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -204,10 +152,8 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
   {
     switch (featureID)
     {
-      case SimpleJPackage.PROGRAM__NAME:
+      case SimpleJPackage.DELEGATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SimpleJPackage.PROGRAM__CONTENU:
-        return CONTENU_EDEFAULT == null ? contenu != null : !CONTENU_EDEFAULT.equals(contenu);
     }
     return super.eIsSet(featureID);
   }
@@ -225,10 +171,8 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", contenu: ");
-    result.append(contenu);
     result.append(')');
     return result.toString();
   }
 
-} //ProgramImpl
+} //DelegationImpl

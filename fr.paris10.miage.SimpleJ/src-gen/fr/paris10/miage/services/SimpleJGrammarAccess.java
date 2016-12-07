@@ -60,20 +60,25 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cClassKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cAttributsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cAttributsAttributParserRuleCall_3_0_0 = (RuleCall)cAttributsAssignment_3_0.eContents().get(0);
-		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
-		private final Assignment cAttributsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cAttributsAttributParserRuleCall_3_1_1_0 = (RuleCall)cAttributsAssignment_3_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cAttributsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cAttributsAttributParserRuleCall_2_1_0 = (RuleCall)cAttributsAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cAttributsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cAttributsAttributParserRuleCall_2_2_1_0 = (RuleCall)cAttributsAssignment_2_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cColonKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cParentAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final CrossReference cParentClasseCrossReference_4_1_0 = (CrossReference)cParentAssignment_4_1.eContents().get(0);
+		private final RuleCall cParentClasseIDTerminalRuleCall_4_1_0_1 = (RuleCall)cParentClasseCrossReference_4_1_0.eContents().get(1);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cColonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cParentAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final CrossReference cParentClasseCrossReference_5_1_0 = (CrossReference)cParentAssignment_5_1.eContents().get(0);
-		private final RuleCall cParentClasseIDTerminalRuleCall_5_1_0_1 = (RuleCall)cParentClasseCrossReference_5_1_0.eContents().get(1);
+		private final Assignment cMethodesAssignment_5_0 = (Assignment)cGroup_5.eContents().get(0);
+		private final RuleCall cMethodesMethodeParserRuleCall_5_0_0 = (RuleCall)cMethodesAssignment_5_0.eContents().get(0);
+		private final Assignment cMethodesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cMethodesMethodeParserRuleCall_5_1_0 = (RuleCall)cMethodesAssignment_5_1.eContents().get(0);
 		
 		/// *
 		// * herite=[Classe]
@@ -82,10 +87,12 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		// * dans le fichier de test.
 		// * 
 		// * / Classe:
-		//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?;
+		//	"class" name=ID ("(" attributs+=Attribut (',' attributs+=Attribut)*) ")"? (":" parent=[Classe])? (methodes+=Methode
+		//	methodes+=Methode*)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?
+		//"class" name=ID ("(" attributs+=Attribut (',' attributs+=Attribut)*) ")"? (":" parent=[Classe])? (methodes+=Methode
+		//methodes+=Methode*)?
 		public Group getGroup() { return cGroup; }
 		
 		//"class"
@@ -97,86 +104,109 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//"("
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+		//("(" attributs+=Attribut (',' attributs+=Attribut)*)
+		public Group getGroup_2() { return cGroup_2; }
 		
-		//(attributs+=Attribut (',' attributs+=Attribut)*)?
-		public Group getGroup_3() { return cGroup_3; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 		
 		//attributs+=Attribut
-		public Assignment getAttributsAssignment_3_0() { return cAttributsAssignment_3_0; }
+		public Assignment getAttributsAssignment_2_1() { return cAttributsAssignment_2_1; }
 		
 		//Attribut
-		public RuleCall getAttributsAttributParserRuleCall_3_0_0() { return cAttributsAttributParserRuleCall_3_0_0; }
+		public RuleCall getAttributsAttributParserRuleCall_2_1_0() { return cAttributsAttributParserRuleCall_2_1_0; }
 		
 		//(',' attributs+=Attribut)*
-		public Group getGroup_3_1() { return cGroup_3_1; }
+		public Group getGroup_2_2() { return cGroup_2_2; }
 		
 		//','
-		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 		
 		//attributs+=Attribut
-		public Assignment getAttributsAssignment_3_1_1() { return cAttributsAssignment_3_1_1; }
+		public Assignment getAttributsAssignment_2_2_1() { return cAttributsAssignment_2_2_1; }
 		
 		//Attribut
-		public RuleCall getAttributsAttributParserRuleCall_3_1_1_0() { return cAttributsAttributParserRuleCall_3_1_1_0; }
+		public RuleCall getAttributsAttributParserRuleCall_2_2_1_0() { return cAttributsAttributParserRuleCall_2_2_1_0; }
 		
-		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		//")"?
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 		
 		//(":" parent=[Classe])?
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_4() { return cGroup_4; }
 		
 		//":"
-		public Keyword getColonKeyword_5_0() { return cColonKeyword_5_0; }
+		public Keyword getColonKeyword_4_0() { return cColonKeyword_4_0; }
 		
 		//parent=[Classe]
-		public Assignment getParentAssignment_5_1() { return cParentAssignment_5_1; }
+		public Assignment getParentAssignment_4_1() { return cParentAssignment_4_1; }
 		
 		//[Classe]
-		public CrossReference getParentClasseCrossReference_5_1_0() { return cParentClasseCrossReference_5_1_0; }
+		public CrossReference getParentClasseCrossReference_4_1_0() { return cParentClasseCrossReference_4_1_0; }
 		
 		//ID
-		public RuleCall getParentClasseIDTerminalRuleCall_5_1_0_1() { return cParentClasseIDTerminalRuleCall_5_1_0_1; }
+		public RuleCall getParentClasseIDTerminalRuleCall_4_1_0_1() { return cParentClasseIDTerminalRuleCall_4_1_0_1; }
+		
+		//(methodes+=Methode methodes+=Methode*)?
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//methodes+=Methode
+		public Assignment getMethodesAssignment_5_0() { return cMethodesAssignment_5_0; }
+		
+		//Methode
+		public RuleCall getMethodesMethodeParserRuleCall_5_0_0() { return cMethodesMethodeParserRuleCall_5_0_0; }
+		
+		//methodes+=Methode*
+		public Assignment getMethodesAssignment_5_1() { return cMethodesAssignment_5_1; }
+		
+		//Methode
+		public RuleCall getMethodesMethodeParserRuleCall_5_1_0() { return cMethodesMethodeParserRuleCall_5_1_0; }
 	}
 	public class AttributElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Attribut");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAccesAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAccesAccesEnumRuleCall_0_0 = (RuleCall)cAccesAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTypeTypeParserRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
+		private final Assignment cDelegueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDelegueDelegationParserRuleCall_1_0 = (RuleCall)cDelegueAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTypeTypeParserRuleCall_4_0 = (RuleCall)cTypeAssignment_4.eContents().get(0);
 		
 		//Attribut:
-		//	acces=Acces name=ID ":" type=Type;
+		//	acces=Acces? delegue=Delegation? name=ID ":" type=Type;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//acces=Acces name=ID ":" type=Type
+		//acces=Acces? delegue=Delegation? name=ID ":" type=Type
 		public Group getGroup() { return cGroup; }
 		
-		//acces=Acces
+		//acces=Acces?
 		public Assignment getAccesAssignment_0() { return cAccesAssignment_0; }
 		
 		//Acces
 		public RuleCall getAccesAccesEnumRuleCall_0_0() { return cAccesAccesEnumRuleCall_0_0; }
 		
+		//delegue=Delegation?
+		public Assignment getDelegueAssignment_1() { return cDelegueAssignment_1; }
+		
+		//Delegation
+		public RuleCall getDelegueDelegationParserRuleCall_1_0() { return cDelegueDelegationParserRuleCall_1_0; }
+		
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
 		//":"
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 		
 		//type=Type
-		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+		public Assignment getTypeAssignment_4() { return cTypeAssignment_4; }
 		
 		//Type
-		public RuleCall getTypeTypeParserRuleCall_3_0() { return cTypeTypeParserRuleCall_3_0; }
+		public RuleCall getTypeTypeParserRuleCall_4_0() { return cTypeTypeParserRuleCall_4_0; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Type");
@@ -199,12 +229,15 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cProgramKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cContenuAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cContenuSTRINGTerminalRuleCall_2_0 = (RuleCall)cContenuAssignment_2.eContents().get(0);
 		
 		//Program:
-		//	"program" name=ID;
+		//	"program" name=ID
+		//	contenu=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"program" name=ID
+		//"program" name=ID contenu=STRING
 		public Group getGroup() { return cGroup; }
 		
 		//"program"
@@ -215,6 +248,111 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//contenu=STRING
+		public Assignment getContenuAssignment_2() { return cContenuAssignment_2; }
+		
+		//STRING
+		public RuleCall getContenuSTRINGTerminalRuleCall_2_0() { return cContenuSTRINGTerminalRuleCall_2_0; }
+	}
+	public class MethodeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Methode");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDefKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cColonKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cTypeTypeParserRuleCall_2_1_0 = (RuleCall)cTypeAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cAttributsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cAttributsAttributParserRuleCall_3_1_0 = (RuleCall)cAttributsAssignment_3_1.eContents().get(0);
+		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
+		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
+		private final Assignment cAttributsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
+		private final RuleCall cAttributsAttributParserRuleCall_3_2_1_0 = (RuleCall)cAttributsAssignment_3_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
+		private final Assignment cContenuAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cContenuSTRINGTerminalRuleCall_4_0 = (RuleCall)cContenuAssignment_4.eContents().get(0);
+		
+		//Methode:
+		//	"def" name=ID (":" type=Type)? ("(" attributs+=Attribut (',' attributs+=Attribut)* ")")?
+		//	contenu=STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"def" name=ID (":" type=Type)? ("(" attributs+=Attribut (',' attributs+=Attribut)* ")")? contenu=STRING
+		public Group getGroup() { return cGroup; }
+		
+		//"def"
+		public Keyword getDefKeyword_0() { return cDefKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//(":" type=Type)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//":"
+		public Keyword getColonKeyword_2_0() { return cColonKeyword_2_0; }
+		
+		//type=Type
+		public Assignment getTypeAssignment_2_1() { return cTypeAssignment_2_1; }
+		
+		//Type
+		public RuleCall getTypeTypeParserRuleCall_2_1_0() { return cTypeTypeParserRuleCall_2_1_0; }
+		
+		//("(" attributs+=Attribut (',' attributs+=Attribut)* ")")?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//"("
+		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
+		
+		//attributs+=Attribut
+		public Assignment getAttributsAssignment_3_1() { return cAttributsAssignment_3_1; }
+		
+		//Attribut
+		public RuleCall getAttributsAttributParserRuleCall_3_1_0() { return cAttributsAttributParserRuleCall_3_1_0; }
+		
+		//(',' attributs+=Attribut)*
+		public Group getGroup_3_2() { return cGroup_3_2; }
+		
+		//','
+		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+		
+		//attributs+=Attribut
+		public Assignment getAttributsAssignment_3_2_1() { return cAttributsAssignment_3_2_1; }
+		
+		//Attribut
+		public RuleCall getAttributsAttributParserRuleCall_3_2_1_0() { return cAttributsAttributParserRuleCall_3_2_1_0; }
+		
+		//")"
+		public Keyword getRightParenthesisKeyword_3_3() { return cRightParenthesisKeyword_3_3; }
+		
+		//contenu=STRING
+		public Assignment getContenuAssignment_4() { return cContenuAssignment_4; }
+		
+		//STRING
+		public RuleCall getContenuSTRINGTerminalRuleCall_4_0() { return cContenuSTRINGTerminalRuleCall_4_0; }
+	}
+	public class DelegationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "fr.paris10.miage.SimpleJ.Delegation");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//Delegation:
+		//	name=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	
 	public class AccesElements extends AbstractEnumRuleElementFinder {
@@ -259,6 +397,8 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	private final AccesElements eAcces;
 	private final TypeElements pType;
 	private final ProgramElements pProgram;
+	private final MethodeElements pMethode;
+	private final DelegationElements pDelegation;
 	
 	private final Grammar grammar;
 	
@@ -275,6 +415,8 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 		this.eAcces = new AccesElements();
 		this.pType = new TypeElements();
 		this.pProgram = new ProgramElements();
+		this.pMethode = new MethodeElements();
+		this.pDelegation = new DelegationElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -322,7 +464,8 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	// * dans le fichier de test.
 	// * 
 	// * / Classe:
-	//	"class" name=ID "(" (attributs+=Attribut (',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?;
+	//	"class" name=ID ("(" attributs+=Attribut (',' attributs+=Attribut)*) ")"? (":" parent=[Classe])? (methodes+=Methode
+	//	methodes+=Methode*)?;
 	public ClasseElements getClasseAccess() {
 		return pClasse;
 	}
@@ -332,7 +475,7 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Attribut:
-	//	acces=Acces name=ID ":" type=Type;
+	//	acces=Acces? delegue=Delegation? name=ID ":" type=Type;
 	public AttributElements getAttributAccess() {
 		return pAttribut;
 	}
@@ -362,13 +505,35 @@ public class SimpleJGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Program:
-	//	"program" name=ID;
+	//	"program" name=ID
+	//	contenu=STRING;
 	public ProgramElements getProgramAccess() {
 		return pProgram;
 	}
 	
 	public ParserRule getProgramRule() {
 		return getProgramAccess().getRule();
+	}
+	
+	//Methode:
+	//	"def" name=ID (":" type=Type)? ("(" attributs+=Attribut (',' attributs+=Attribut)* ")")?
+	//	contenu=STRING;
+	public MethodeElements getMethodeAccess() {
+		return pMethode;
+	}
+	
+	public ParserRule getMethodeRule() {
+		return getMethodeAccess().getRule();
+	}
+	
+	//Delegation:
+	//	name=ID;
+	public DelegationElements getDelegationAccess() {
+		return pDelegation;
+	}
+	
+	public ParserRule getDelegationRule() {
+		return getDelegationAccess().getRule();
 	}
 	
 	//terminal ID:

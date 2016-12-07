@@ -133,13 +133,22 @@ public interface SimpleJPackage extends EPackage
   int CLASSE__PARENT = 2;
 
   /**
+   * The feature id for the '<em><b>Methodes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASSE__METHODES = 3;
+
+  /**
    * The number of structural features of the '<em>Classe</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLASSE_FEATURE_COUNT = 3;
+  int CLASSE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link fr.paris10.miage.simpleJ.impl.AttributImpl <em>Attribut</em>}' class.
@@ -161,13 +170,22 @@ public interface SimpleJPackage extends EPackage
   int ATTRIBUT__ACCES = 0;
 
   /**
+   * The feature id for the '<em><b>Delegue</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__DELEGUE = 1;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUT__NAME = 1;
+  int ATTRIBUT__NAME = 2;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -176,7 +194,7 @@ public interface SimpleJPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUT__TYPE = 2;
+  int ATTRIBUT__TYPE = 3;
 
   /**
    * The number of structural features of the '<em>Attribut</em>' class.
@@ -185,7 +203,7 @@ public interface SimpleJPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUT_FEATURE_COUNT = 3;
+  int ATTRIBUT_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link fr.paris10.miage.simpleJ.impl.TypeImpl <em>Type</em>}' class.
@@ -235,13 +253,105 @@ public interface SimpleJPackage extends EPackage
   int PROGRAM__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Contenu</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROGRAM__CONTENU = 1;
+
+  /**
    * The number of structural features of the '<em>Program</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROGRAM_FEATURE_COUNT = 1;
+  int PROGRAM_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link fr.paris10.miage.simpleJ.impl.MethodeImpl <em>Methode</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see fr.paris10.miage.simpleJ.impl.MethodeImpl
+   * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getMethode()
+   * @generated
+   */
+  int METHODE = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHODE__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHODE__TYPE = 1;
+
+  /**
+   * The feature id for the '<em><b>Attributs</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHODE__ATTRIBUTS = 2;
+
+  /**
+   * The feature id for the '<em><b>Contenu</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHODE__CONTENU = 3;
+
+  /**
+   * The number of structural features of the '<em>Methode</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int METHODE_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link fr.paris10.miage.simpleJ.impl.DelegationImpl <em>Delegation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see fr.paris10.miage.simpleJ.impl.DelegationImpl
+   * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getDelegation()
+   * @generated
+   */
+  int DELEGATION = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DELEGATION__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Delegation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DELEGATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link fr.paris10.miage.simpleJ.Acces <em>Acces</em>}' enum.
@@ -251,7 +361,7 @@ public interface SimpleJPackage extends EPackage
    * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getAcces()
    * @generated
    */
-  int ACCES = 5;
+  int ACCES = 7;
 
 
   /**
@@ -330,6 +440,17 @@ public interface SimpleJPackage extends EPackage
   EReference getClasse_Parent();
 
   /**
+   * Returns the meta object for the containment reference list '{@link fr.paris10.miage.simpleJ.Classe#getMethodes <em>Methodes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Methodes</em>'.
+   * @see fr.paris10.miage.simpleJ.Classe#getMethodes()
+   * @see #getClasse()
+   * @generated
+   */
+  EReference getClasse_Methodes();
+
+  /**
    * Returns the meta object for class '{@link fr.paris10.miage.simpleJ.Attribut <em>Attribut</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -349,6 +470,17 @@ public interface SimpleJPackage extends EPackage
    * @generated
    */
   EAttribute getAttribut_Acces();
+
+  /**
+   * Returns the meta object for the containment reference '{@link fr.paris10.miage.simpleJ.Attribut#getDelegue <em>Delegue</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Delegue</em>'.
+   * @see fr.paris10.miage.simpleJ.Attribut#getDelegue()
+   * @see #getAttribut()
+   * @generated
+   */
+  EReference getAttribut_Delegue();
 
   /**
    * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Attribut#getName <em>Name</em>}'.
@@ -413,6 +545,92 @@ public interface SimpleJPackage extends EPackage
    * @generated
    */
   EAttribute getProgram_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Program#getContenu <em>Contenu</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Contenu</em>'.
+   * @see fr.paris10.miage.simpleJ.Program#getContenu()
+   * @see #getProgram()
+   * @generated
+   */
+  EAttribute getProgram_Contenu();
+
+  /**
+   * Returns the meta object for class '{@link fr.paris10.miage.simpleJ.Methode <em>Methode</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Methode</em>'.
+   * @see fr.paris10.miage.simpleJ.Methode
+   * @generated
+   */
+  EClass getMethode();
+
+  /**
+   * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Methode#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see fr.paris10.miage.simpleJ.Methode#getName()
+   * @see #getMethode()
+   * @generated
+   */
+  EAttribute getMethode_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link fr.paris10.miage.simpleJ.Methode#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see fr.paris10.miage.simpleJ.Methode#getType()
+   * @see #getMethode()
+   * @generated
+   */
+  EReference getMethode_Type();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link fr.paris10.miage.simpleJ.Methode#getAttributs <em>Attributs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributs</em>'.
+   * @see fr.paris10.miage.simpleJ.Methode#getAttributs()
+   * @see #getMethode()
+   * @generated
+   */
+  EReference getMethode_Attributs();
+
+  /**
+   * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Methode#getContenu <em>Contenu</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Contenu</em>'.
+   * @see fr.paris10.miage.simpleJ.Methode#getContenu()
+   * @see #getMethode()
+   * @generated
+   */
+  EAttribute getMethode_Contenu();
+
+  /**
+   * Returns the meta object for class '{@link fr.paris10.miage.simpleJ.Delegation <em>Delegation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Delegation</em>'.
+   * @see fr.paris10.miage.simpleJ.Delegation
+   * @generated
+   */
+  EClass getDelegation();
+
+  /**
+   * Returns the meta object for the attribute '{@link fr.paris10.miage.simpleJ.Delegation#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see fr.paris10.miage.simpleJ.Delegation#getName()
+   * @see #getDelegation()
+   * @generated
+   */
+  EAttribute getDelegation_Name();
 
   /**
    * Returns the meta object for enum '{@link fr.paris10.miage.simpleJ.Acces <em>Acces</em>}'.
@@ -508,6 +726,14 @@ public interface SimpleJPackage extends EPackage
     EReference CLASSE__PARENT = eINSTANCE.getClasse_Parent();
 
     /**
+     * The meta object literal for the '<em><b>Methodes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLASSE__METHODES = eINSTANCE.getClasse_Methodes();
+
+    /**
      * The meta object literal for the '{@link fr.paris10.miage.simpleJ.impl.AttributImpl <em>Attribut</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -524,6 +750,14 @@ public interface SimpleJPackage extends EPackage
      * @generated
      */
     EAttribute ATTRIBUT__ACCES = eINSTANCE.getAttribut_Acces();
+
+    /**
+     * The meta object literal for the '<em><b>Delegue</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTRIBUT__DELEGUE = eINSTANCE.getAttribut_Delegue();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -576,6 +810,74 @@ public interface SimpleJPackage extends EPackage
      * @generated
      */
     EAttribute PROGRAM__NAME = eINSTANCE.getProgram_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Contenu</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROGRAM__CONTENU = eINSTANCE.getProgram_Contenu();
+
+    /**
+     * The meta object literal for the '{@link fr.paris10.miage.simpleJ.impl.MethodeImpl <em>Methode</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.paris10.miage.simpleJ.impl.MethodeImpl
+     * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getMethode()
+     * @generated
+     */
+    EClass METHODE = eINSTANCE.getMethode();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHODE__NAME = eINSTANCE.getMethode_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference METHODE__TYPE = eINSTANCE.getMethode_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Attributs</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference METHODE__ATTRIBUTS = eINSTANCE.getMethode_Attributs();
+
+    /**
+     * The meta object literal for the '<em><b>Contenu</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute METHODE__CONTENU = eINSTANCE.getMethode_Contenu();
+
+    /**
+     * The meta object literal for the '{@link fr.paris10.miage.simpleJ.impl.DelegationImpl <em>Delegation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.paris10.miage.simpleJ.impl.DelegationImpl
+     * @see fr.paris10.miage.simpleJ.impl.SimpleJPackageImpl#getDelegation()
+     * @generated
+     */
+    EClass DELEGATION = eINSTANCE.getDelegation();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DELEGATION__NAME = eINSTANCE.getDelegation_Name();
 
     /**
      * The meta object literal for the '{@link fr.paris10.miage.simpleJ.Acces <em>Acces</em>}' enum.

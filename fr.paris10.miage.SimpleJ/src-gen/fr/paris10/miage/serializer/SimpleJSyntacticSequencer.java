@@ -11,6 +11,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
@@ -18,10 +20,12 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class SimpleJSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SimpleJGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_Classe_RightParenthesisKeyword_3_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SimpleJGrammarAccess) access;
+		match_Classe_RightParenthesisKeyword_3_q = new TokenAlias(false, true, grammarAccess.getClasseAccess().getRightParenthesisKeyword_3());
 	}
 	
 	@Override
@@ -36,8 +40,23 @@ public class SimpleJSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_Classe_RightParenthesisKeyword_3_q.equals(syntax))
+				emit_Classe_RightParenthesisKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     ')'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     attributs+=Attribut (ambiguity) ':' parent=[Classe|ID]
+	 *     attributs+=Attribut (ambiguity) (rule end)
+	 *     attributs+=Attribut (ambiguity) methodes+=Methode
+	 */
+	protected void emit_Classe_RightParenthesisKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

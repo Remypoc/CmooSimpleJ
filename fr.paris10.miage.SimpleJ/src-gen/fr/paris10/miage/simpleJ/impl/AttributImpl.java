@@ -5,6 +5,7 @@ package fr.paris10.miage.simpleJ.impl;
 
 import fr.paris10.miage.simpleJ.Acces;
 import fr.paris10.miage.simpleJ.Attribut;
+import fr.paris10.miage.simpleJ.Delegation;
 import fr.paris10.miage.simpleJ.SimpleJPackage;
 import fr.paris10.miage.simpleJ.Type;
 
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link fr.paris10.miage.simpleJ.impl.AttributImpl#getAcces <em>Acces</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.impl.AttributImpl#getDelegue <em>Delegue</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.impl.AttributImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.impl.AttributImpl#getType <em>Type</em>}</li>
  * </ul>
@@ -53,6 +55,16 @@ public class AttributImpl extends MinimalEObjectImpl.Container implements Attrib
    * @ordered
    */
   protected Acces acces = ACCES_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getDelegue() <em>Delegue</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDelegue()
+   * @generated
+   * @ordered
+   */
+  protected Delegation delegue;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -126,6 +138,54 @@ public class AttributImpl extends MinimalEObjectImpl.Container implements Attrib
     acces = newAcces == null ? ACCES_EDEFAULT : newAcces;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.ATTRIBUT__ACCES, oldAcces, acces));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Delegation getDelegue()
+  {
+    return delegue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDelegue(Delegation newDelegue, NotificationChain msgs)
+  {
+    Delegation oldDelegue = delegue;
+    delegue = newDelegue;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimpleJPackage.ATTRIBUT__DELEGUE, oldDelegue, newDelegue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDelegue(Delegation newDelegue)
+  {
+    if (newDelegue != delegue)
+    {
+      NotificationChain msgs = null;
+      if (delegue != null)
+        msgs = ((InternalEObject)delegue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SimpleJPackage.ATTRIBUT__DELEGUE, null, msgs);
+      if (newDelegue != null)
+        msgs = ((InternalEObject)newDelegue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SimpleJPackage.ATTRIBUT__DELEGUE, null, msgs);
+      msgs = basicSetDelegue(newDelegue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SimpleJPackage.ATTRIBUT__DELEGUE, newDelegue, newDelegue));
   }
 
   /**
@@ -209,6 +269,8 @@ public class AttributImpl extends MinimalEObjectImpl.Container implements Attrib
   {
     switch (featureID)
     {
+      case SimpleJPackage.ATTRIBUT__DELEGUE:
+        return basicSetDelegue(null, msgs);
       case SimpleJPackage.ATTRIBUT__TYPE:
         return basicSetType(null, msgs);
     }
@@ -227,6 +289,8 @@ public class AttributImpl extends MinimalEObjectImpl.Container implements Attrib
     {
       case SimpleJPackage.ATTRIBUT__ACCES:
         return getAcces();
+      case SimpleJPackage.ATTRIBUT__DELEGUE:
+        return getDelegue();
       case SimpleJPackage.ATTRIBUT__NAME:
         return getName();
       case SimpleJPackage.ATTRIBUT__TYPE:
@@ -247,6 +311,9 @@ public class AttributImpl extends MinimalEObjectImpl.Container implements Attrib
     {
       case SimpleJPackage.ATTRIBUT__ACCES:
         setAcces((Acces)newValue);
+        return;
+      case SimpleJPackage.ATTRIBUT__DELEGUE:
+        setDelegue((Delegation)newValue);
         return;
       case SimpleJPackage.ATTRIBUT__NAME:
         setName((String)newValue);
@@ -271,6 +338,9 @@ public class AttributImpl extends MinimalEObjectImpl.Container implements Attrib
       case SimpleJPackage.ATTRIBUT__ACCES:
         setAcces(ACCES_EDEFAULT);
         return;
+      case SimpleJPackage.ATTRIBUT__DELEGUE:
+        setDelegue((Delegation)null);
+        return;
       case SimpleJPackage.ATTRIBUT__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -293,6 +363,8 @@ public class AttributImpl extends MinimalEObjectImpl.Container implements Attrib
     {
       case SimpleJPackage.ATTRIBUT__ACCES:
         return acces != ACCES_EDEFAULT;
+      case SimpleJPackage.ATTRIBUT__DELEGUE:
+        return delegue != null;
       case SimpleJPackage.ATTRIBUT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SimpleJPackage.ATTRIBUT__TYPE:

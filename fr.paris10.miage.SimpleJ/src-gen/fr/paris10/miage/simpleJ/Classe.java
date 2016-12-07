@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.paris10.miage.simpleJ.Classe#getName <em>Name</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.Classe#getAttributs <em>Attributs</em>}</li>
  *   <li>{@link fr.paris10.miage.simpleJ.Classe#getParent <em>Parent</em>}</li>
+ *   <li>{@link fr.paris10.miage.simpleJ.Classe#getMethodes <em>Methodes</em>}</li>
  * </ul>
  *
  * @see fr.paris10.miage.simpleJ.SimpleJPackage#getClasse()
@@ -94,5 +95,21 @@ public interface Classe extends EObject
    * @generated
    */
   void setParent(Classe value);
+
+  /**
+   * Returns the value of the '<em><b>Methodes</b></em>' containment reference list.
+   * The list contents are of type {@link fr.paris10.miage.simpleJ.Methode}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Methodes</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Methodes</em>' containment reference list.
+   * @see fr.paris10.miage.simpleJ.SimpleJPackage#getClasse_Methodes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Methode> getMethodes();
 
 } // Classe

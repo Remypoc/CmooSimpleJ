@@ -11,12 +11,14 @@ import fr.paris10.miage.simpleJ.Classe
 import fr.paris10.miage.simpleJ.Attribut
 import fr.paris10.miage.simpleJ.Acces
 import fr.paris10.miage.simpleJ.Program
+import fr.paris10.miage.simpleJ.Methode
 
 /**
  * Generates code from your model files on save.
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
+ 
 class SimpleJGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
@@ -27,7 +29,7 @@ class SimpleJGenerator extends AbstractGenerator {
 //				.join(', '))
 		val programs = resource.allContents.filter(typeof(Program)).toSet
 		for (Program program : programs) {
-			fsa.generateFile(program.name + ".java", genererMain(program.name))
+			fsa.generateFile(program.name + ".java", genererMain(program.name, program.contenu))
 		}
 
 		val classes = resource.allContents.filter(typeof(Classe)).toSet
@@ -59,14 +61,12 @@ class SimpleJGenerator extends AbstractGenerator {
 	}
 
 	//public «classe.name»(«FOR attribut : classe.attributs SEPARATOR', '»«ENDFOR») {
+	//«FOR attribut : classe.attributs» this.«attribut.name» = «attribut.name»; «ENDFOR» 
 	def genererConstructeur(Classe classe) '''
-		public «classe.name»(«classe.attributs.map[type.name + " " + name].join(', ')») {
+		public «classe.name»() {«««classe.attributs.map[type.name + " " + name].join(', ') 
 			«genererConstructeurParent(classe)»
-			«FOR attribut : classe.attributs»
-				this.«attribut.name» = «attribut.name»;
-			«ENDFOR»
-		}
-	'''
+		}''' 
+			
 	
 	def genererConstructeurParent(Classe classe)
 		'''«IF classe.parent != null»super(«classe.parent.attributs.map[name].join(', ')»)«ENDIF»'''
@@ -92,7 +92,7 @@ class SimpleJGenerator extends AbstractGenerator {
 
 	def genererGetter(Attribut attribut) '''
 		
-		public «attribut.type.name» get«attribut.name.toFirstUpper()»()
+		public «attribut.type.name» get«attribut.name.toFirstUpper()»() {
 			return «attribut.name»;
 		}
 	'''
@@ -106,17 +106,16 @@ class SimpleJGenerator extends AbstractGenerator {
 	def genererHeritage(Classe classe) '''
 		«IF classe.parent != null»extends «classe.parent.name»«ENDIF»'''
 
-	def genererMain(String titre) '''
-		public static void «titre»() {
-			
-			Point p1 = new Point ();
-			p1.setX(3); 
-			p1.setY(4);
-			Point3D p2 = new Point3D() ;
-			p2.setX(3); 
-			p2.setY(4); 
-			p2.setZ(5);
-			System.out.println(String.format("(%d, %d, %d )",p2.getX(), p2.getY(), p2.getZ())); //résultat : (3, 4, 5)
+	def genererMain(String titre, String contenu) '''
+	public class «titre» {
+		
+		public static void main() {
+			«contenu»
 		}
+	}
+	'''
+	
+	def genererMethode(Methode method) '''
+		
 	'''
 }

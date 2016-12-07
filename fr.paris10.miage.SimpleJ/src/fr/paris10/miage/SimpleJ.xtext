@@ -14,11 +14,12 @@ Model:
  * 
  */
 Classe:
-	"class" name=ID "(" (attributs+=Attribut(',' attributs+=Attribut)*)? ")" (":" parent=[Classe])?
+	"class" name=ID ("("attributs+=Attribut(',' attributs+=Attribut)*)")"?  (":" parent=[Classe])?
+	(methodes+=Methode(methodes+=Methode)*)?
 ;
 
 Attribut:
-	acces=Acces name=ID ":" type=Type
+	(acces=Acces)? (delegue=Delegation)? name=ID ":" type=Type
 ;
 
 enum Acces :
@@ -31,4 +32,14 @@ Type :
 
 Program:
 	"program" name=ID
+	contenu=STRING
+;
+
+Methode:
+	"def" name=ID (":" type=Type)? ("("attributs+=Attribut(',' attributs+=Attribut)*")")?
+	contenu=STRING
+;
+
+Delegation:
+	name=ID
 ;

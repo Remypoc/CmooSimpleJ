@@ -7,6 +7,8 @@ import com.google.inject.Inject;
 import fr.paris10.miage.services.SimpleJGrammarAccess;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
+import fr.paris10.miage.simpleJ.Delegation;
+import fr.paris10.miage.simpleJ.Methode;
 import fr.paris10.miage.simpleJ.Model;
 import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.SimpleJPackage;
@@ -42,6 +44,12 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case SimpleJPackage.CLASSE:
 				sequence_Classe(context, (Classe) semanticObject); 
 				return; 
+			case SimpleJPackage.DELEGATION:
+				sequence_Delegation(context, (Delegation) semanticObject); 
+				return; 
+			case SimpleJPackage.METHODE:
+				sequence_Methode(context, (Methode) semanticObject); 
+				return; 
 			case SimpleJPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
@@ -61,22 +69,10 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Attribut returns Attribut
 	 *
 	 * Constraint:
-	 *     (acces=Acces name=ID type=Type)
+	 *     (acces=Acces? delegue=Delegation? name=ID type=Type)
 	 */
 	protected void sequence_Attribut(ISerializationContext context, Attribut semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SimpleJPackage.Literals.ATTRIBUT__ACCES) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleJPackage.Literals.ATTRIBUT__ACCES));
-			if (transientValues.isValueTransient(semanticObject, SimpleJPackage.Literals.ATTRIBUT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleJPackage.Literals.ATTRIBUT__NAME));
-			if (transientValues.isValueTransient(semanticObject, SimpleJPackage.Literals.ATTRIBUT__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleJPackage.Literals.ATTRIBUT__TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributAccess().getAccesAccesEnumRuleCall_0_0(), semanticObject.getAcces());
-		feeder.accept(grammarAccess.getAttributAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getAttributAccess().getTypeTypeParserRuleCall_3_0(), semanticObject.getType());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -85,9 +81,39 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Classe returns Classe
 	 *
 	 * Constraint:
-	 *     (name=ID (attributs+=Attribut attributs+=Attribut*)? parent=[Classe|ID]?)
+	 *     (name=ID attributs+=Attribut attributs+=Attribut* parent=[Classe|ID]? (methodes+=Methode methodes+=Methode*)?)
 	 */
 	protected void sequence_Classe(ISerializationContext context, Classe semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Delegation returns Delegation
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_Delegation(ISerializationContext context, Delegation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SimpleJPackage.Literals.DELEGATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleJPackage.Literals.DELEGATION__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDelegationAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Methode returns Methode
+	 *
+	 * Constraint:
+	 *     (name=ID type=Type? (attributs+=Attribut attributs+=Attribut*)? contenu=STRING)
+	 */
+	protected void sequence_Methode(ISerializationContext context, Methode semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -109,15 +135,18 @@ public class SimpleJSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Program returns Program
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (name=ID contenu=STRING)
 	 */
 	protected void sequence_Program(ISerializationContext context, Program semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, SimpleJPackage.Literals.PROGRAM__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleJPackage.Literals.PROGRAM__NAME));
+			if (transientValues.isValueTransient(semanticObject, SimpleJPackage.Literals.PROGRAM__CONTENU) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleJPackage.Literals.PROGRAM__CONTENU));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getProgramAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getProgramAccess().getContenuSTRINGTerminalRuleCall_2_0(), semanticObject.getContenu());
 		feeder.finish();
 	}
 	

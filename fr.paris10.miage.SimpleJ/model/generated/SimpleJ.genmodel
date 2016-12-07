@@ -19,9 +19,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Classe/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Classe/attributs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Classe/parent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Classe/methodes"/>
     </genClasses>
     <genClasses ecoreClass="SimpleJ.ecore#//Attribut">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Attribut/acces"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Attribut/delegue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Attribut/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Attribut/type"/>
     </genClasses>
@@ -30,6 +32,16 @@
     </genClasses>
     <genClasses ecoreClass="SimpleJ.ecore#//Program">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Program/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Program/contenu"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleJ.ecore#//Methode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Methode/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Methode/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleJ.ecore#//Methode/attributs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Methode/contenu"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleJ.ecore#//Delegation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleJ.ecore#//Delegation/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

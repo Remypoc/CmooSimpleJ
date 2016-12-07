@@ -6,6 +6,8 @@ package fr.paris10.miage.simpleJ.impl;
 import fr.paris10.miage.simpleJ.Acces;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
+import fr.paris10.miage.simpleJ.Delegation;
+import fr.paris10.miage.simpleJ.Methode;
 import fr.paris10.miage.simpleJ.Model;
 import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.SimpleJFactory;
@@ -62,6 +64,20 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    * @generated
    */
   private EClass programEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass methodeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass delegationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -208,6 +224,16 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getClasse_Methodes()
+  {
+    return (EReference)classeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAttribut()
   {
     return attributEClass;
@@ -228,9 +254,19 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getAttribut_Delegue()
+  {
+    return (EReference)attributEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getAttribut_Name()
   {
-    return (EAttribute)attributEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)attributEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -240,7 +276,7 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
    */
   public EReference getAttribut_Type()
   {
-    return (EReference)attributEClass.getEStructuralFeatures().get(2);
+    return (EReference)attributEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -281,6 +317,86 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
   public EAttribute getProgram_Name()
   {
     return (EAttribute)programEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getProgram_Contenu()
+  {
+    return (EAttribute)programEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMethode()
+  {
+    return methodeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMethode_Name()
+  {
+    return (EAttribute)methodeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMethode_Type()
+  {
+    return (EReference)methodeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMethode_Attributs()
+  {
+    return (EReference)methodeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMethode_Contenu()
+  {
+    return (EAttribute)methodeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDelegation()
+  {
+    return delegationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDelegation_Name()
+  {
+    return (EAttribute)delegationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -331,9 +447,11 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
     createEAttribute(classeEClass, CLASSE__NAME);
     createEReference(classeEClass, CLASSE__ATTRIBUTS);
     createEReference(classeEClass, CLASSE__PARENT);
+    createEReference(classeEClass, CLASSE__METHODES);
 
     attributEClass = createEClass(ATTRIBUT);
     createEAttribute(attributEClass, ATTRIBUT__ACCES);
+    createEReference(attributEClass, ATTRIBUT__DELEGUE);
     createEAttribute(attributEClass, ATTRIBUT__NAME);
     createEReference(attributEClass, ATTRIBUT__TYPE);
 
@@ -342,6 +460,16 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
 
     programEClass = createEClass(PROGRAM);
     createEAttribute(programEClass, PROGRAM__NAME);
+    createEAttribute(programEClass, PROGRAM__CONTENU);
+
+    methodeEClass = createEClass(METHODE);
+    createEAttribute(methodeEClass, METHODE__NAME);
+    createEReference(methodeEClass, METHODE__TYPE);
+    createEReference(methodeEClass, METHODE__ATTRIBUTS);
+    createEAttribute(methodeEClass, METHODE__CONTENU);
+
+    delegationEClass = createEClass(DELEGATION);
+    createEAttribute(delegationEClass, DELEGATION__NAME);
 
     // Create enums
     accesEEnum = createEEnum(ACCES);
@@ -386,9 +514,11 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
     initEAttribute(getClasse_Name(), ecorePackage.getEString(), "name", null, 0, 1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getClasse_Attributs(), this.getAttribut(), null, "attributs", null, 0, -1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getClasse_Parent(), this.getClasse(), null, "parent", null, 0, 1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getClasse_Methodes(), this.getMethode(), null, "methodes", null, 0, -1, Classe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributEClass, Attribut.class, "Attribut", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttribut_Acces(), this.getAcces(), "acces", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttribut_Delegue(), this.getDelegation(), null, "delegue", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttribut_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttribut_Type(), this.getType(), null, "type", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -397,6 +527,16 @@ public class SimpleJPackageImpl extends EPackageImpl implements SimpleJPackage
 
     initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getProgram_Name(), ecorePackage.getEString(), "name", null, 0, 1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProgram_Contenu(), ecorePackage.getEString(), "contenu", null, 0, 1, Program.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(methodeEClass, Methode.class, "Methode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMethode_Name(), ecorePackage.getEString(), "name", null, 0, 1, Methode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMethode_Type(), this.getType(), null, "type", null, 0, 1, Methode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMethode_Attributs(), this.getAttribut(), null, "attributs", null, 0, -1, Methode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMethode_Contenu(), ecorePackage.getEString(), "contenu", null, 0, 1, Methode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(delegationEClass, Delegation.class, "Delegation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDelegation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Delegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(accesEEnum, Acces.class, "Acces");
