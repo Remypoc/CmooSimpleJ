@@ -77,15 +77,6 @@ class SimpleJGenerator extends AbstractGenerator {
 	def genererConstructeurParent(Classe classe)
 		'''«IF classe.parent != null»super(«classe.parent.attributs.map[name].join(', ')»)«ENDIF»'''
 
-	/*
-	 * public «classe.name»(«FOR attribut : classe.attributs»«attribut.type.name» «attribut.name», «ENDFOR») {
-	 * 		«FOR attribut : classe.attributs»
-	 * 			this.«attribut.name» = «attribut.name»;
-	 * 		«ENDFOR»
-	 * 	}
-	 * 
-	 * 
-	 */
 	def genererGetterSetter(Attribut attribut) '''
 		«IF attribut.acces == Acces.ACCESS_VAR»
 			«genererGetter(attribut)»
@@ -128,7 +119,11 @@ class SimpleJGenerator extends AbstractGenerator {
 			public «IF methode.type != null»«methode.type.name»«ELSE»void«ENDIF» «methode.name»(«methode.attributs.map[type.name + " " + name].join(', ')») {
 				«methode.contenu»
 			}
-				
+		«ENDFOR»
+		«FOR attribut : classe.attributs»
+			«IF attribut.delegue != null»
+				«attribut.type.name»
+			«ENDIF»
 		«ENDFOR»
 		'''
 	}

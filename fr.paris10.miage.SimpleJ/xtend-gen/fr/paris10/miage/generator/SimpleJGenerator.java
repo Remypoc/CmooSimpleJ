@@ -8,6 +8,7 @@ import com.google.common.collect.Iterators;
 import fr.paris10.miage.simpleJ.Acces;
 import fr.paris10.miage.simpleJ.Attribut;
 import fr.paris10.miage.simpleJ.Classe;
+import fr.paris10.miage.simpleJ.Delegation;
 import fr.paris10.miage.simpleJ.Methode;
 import fr.paris10.miage.simpleJ.Program;
 import fr.paris10.miage.simpleJ.Type;
@@ -157,13 +158,6 @@ public class SimpleJGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  /**
-   * public «classe.name»(«FOR attribut : classe.attributs»«attribut.type.name» «attribut.name», «ENDFOR») {
-   * 		«FOR attribut : classe.attributs»
-   * 			this.«attribut.name» = «attribut.name»;
-   * 		«ENDFOR»
-   * 	}
-   */
   public CharSequence genererGetterSetter(final Attribut attribut) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -322,8 +316,21 @@ public class SimpleJGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
+      }
+    }
+    {
+      EList<Attribut> _attributs_1 = classe.getAttributs();
+      for(final Attribut attribut : _attributs_1) {
+        {
+          Delegation _delegue = attribut.getDelegue();
+          boolean _notEquals_1 = (!Objects.equal(_delegue, null));
+          if (_notEquals_1) {
+            Type _type_2 = attribut.getType();
+            String _name_2 = _type_2.getName();
+            _builder.append(_name_2, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     return _builder.toString();
